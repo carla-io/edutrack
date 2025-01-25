@@ -1,92 +1,130 @@
 /* General Reset */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-  
-  /* Top Navbar */
-  .top-navbar {
-    display: flex;
-    align-items: center;
-    padding: 0 20px;
-    height: 60px;
-    position: fixed;
-    width: 100%;
-    z-index: 10;
-    background-color: transparent; /* No background */
-  }
-  
-  .navbar-content {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-  }
-  
-  /* Hamburger Icon (Now on the left) */
-  .hamburger {
-    cursor: pointer;
-    color: white;
-    margin-top: 60px;
-    margin-left: 20px;
-  }
-  
-  /* Navbar Logo Section */
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Top Navbar */
+.top-navbar {
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  height: 60px;
+  position: fixed;
+  width: 100%;
+  z-index: 10;
+  background-color: transparent; /* No background */
+}
+
+.navbar-content {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.hamburger {
+  cursor: pointer;
+  color: white;
+  margin-top: 60px;
+  margin-left: 20px;
+}
+
+.navbar-logo {
+  margin-top: 60px;
+  display: flex;
+  align-items: center;
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: white;
+  margin-left: 30px;
+}
+
+.navbar-icon {
+  margin-right: 10px;
+  font-size: 2rem;
+  color: white;
+}
+
+/* Sidebar */
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  position: fixed;
+  top: 60px;
+  left: 0;
+  width: 250px;
+  transition: transform 0.3s ease;
+  transform: translateX(0);
+  z-index: 5; /* Keep it above content */
+}
+
+.sidebar.collapsed {
+  transform: translateX(-250px); /* Hide sidebar when collapsed */
+}
+
+.nav-list {
+  list-style-type: none;
+  margin: 20px;
+  padding: 0;
+  margin-top: 60px;
+  margin-left: 20px;
+}
+
+.nav-item {
+  margin-bottom: 15px;
+  margin-left: 10px;
+  margin-top: 10px;
+}
+
+.nav-link {
+  color: white;
+  text-decoration: none;
+  font-size: 1.2rem;
+  transition: color 0.3s;
+}
+
+.nav-link:hover {
+  color: #f4a261; /* Subtle hover effect */
+}
+
+/* Media Queries for Responsiveness */
+
+/* For smaller screens (Tablets and below) */
+@media (max-width: 768px) {
   .navbar-logo {
-    margin-top: 60px;
-    display: flex;
-    align-items: center;
-    font-size: 1.8rem;
-    font-weight: bold;
-    color: white;
-    margin-left: 30px;
-  }
-  
-  .navbar-icon {
-    margin-right: 10px;
-    font-size: 2rem;
-    color: white;
-  }
-  
-  /* Sidebar */
-  .sidebar {
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
-    position: fixed;
-    top: 60px;
-    left: 0;
-    width: 250px;
-    background-color: transparent; /* No background */
-    transition: transform 0.3s ease;
-    transform: translateX(0);
-  }
-  
-  .sidebar.collapsed {
-    transform: translateX(-250px); /* Hide sidebar when collapsed */
-  }
-  
-  .nav-list {
-    list-style-type: none;
-    margin: 20px;
-    padding: 0;
-    margin-top: 60px;
-    margin-left: 20px;
-  }
-  
-  .nav-item {
-    margin-bottom: 15px;
     margin-left: 10px;
   }
-  
-  .nav-link {
-    color: white;
-    text-decoration: none;
-    font-size: 1.2rem;
-    transition: color 0.3s;
+
+  .hamburger {
+    margin-left: 10px;
   }
-  
-  .nav-link:hover {
-    color: #f4a261; /* Subtle hover effect */
+
+  .sidebar {
+    width: 200px; /* Smaller sidebar for mobile */
   }
-  
+
+  .sidebar.collapsed {
+    transform: translateX(-200px); /* Hide sidebar */
+  }
+
+  .nav-list {
+    margin-top: 0;
+  }
+}
+
+/* For very small screens (Mobile phones) */
+@media (max-width: 480px) {
+  .top-navbar {
+    padding: 0 10px; /* Adjust padding for mobile */
+  }
+
+  .sidebar {
+    width: 180px; /* Even smaller sidebar for mobile */
+  }
+
+  .navbar-logo {
+    font-size: 1.5rem;
+  }
+}

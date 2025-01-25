@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import '../components/css/RegisterPage.css';
+import '../components/css/UserProfile.css';
 
-const RegisterPage = () => {
+const UserProfile = () => {
   const [image, setImage] = useState(null);
 
   const handleImageChange = (e) => {
@@ -16,16 +16,16 @@ const RegisterPage = () => {
   };
 
   return (
-    <div className="register-container">
-      <div className="register-content">
-        <div className="register-card">
+    <div className="user-container">
+      <div className="user-content">
+        <div className="user-card">
           <div className="header">
             {/* Optional header if you need */}
           </div>
 
-          <h1 className="register-heading">Create New Account</h1>
-          <p className="register-link">
-            Already Registered? <a href="/login">Login</a>
+          <h1 className="user-heading">USER PROFILE</h1>
+          <p className="user-link">
+            Already usered? <a href="/login">Login</a>
           </p>
 
           <form>
@@ -69,15 +69,15 @@ const RegisterPage = () => {
               />
             </div>
 
-            <button type="submit" className="register-button">
-              Sign Up
+            <button type="submit" className="user-button">
+              Update
             </button>
           </form>
 
        
         </div>
 
-        {/* Image upload section outside register card */}
+        {/* Image upload section outside user card */}
         <div className="image-upload-container">
           <div className="form-group image-upload">
             <label htmlFor="profile-image">Profile Picture</label>
@@ -102,4 +102,4 @@ const RegisterPage = () => {
   );
 };
 
-export default RegisterPage;
+export default UserProfile;

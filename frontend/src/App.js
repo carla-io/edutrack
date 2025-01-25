@@ -4,6 +4,8 @@ import LandingPage from './components/LandingPage'; // Import LandingPage compon
 import Login from './components/LoginPage'; // Import LoginSignup component
 import Navbar from './components/Navbar'; // Import Navbar component
 import Register from './components/RegisterPage'; // Import Register component
+import UserProfile from './components/UserProfile';
+import About from './components/About';
 
 function App() {
   return (
@@ -20,6 +22,9 @@ function App() {
           <Route path='/login' element={<Login />} />
 
           <Route path='/register' element={<Register />} />
+
+          <Route path='/user-profile' element={<UserProfile />} />
+          <Route path='/about' element={<About />} />
         </Routes>
       </BrowserRouter>
     </div>
