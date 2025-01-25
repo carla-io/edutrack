@@ -1,0 +1,44 @@
+# Byte-compiled / compiled files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environment
+env/
+venv/
+ENV/
+.venv/
+env.bak/
+
+# Logs and temporary files
+*.log
+*.out
+*.tmp
+*.swp
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Python package files
+*.egg-info/
+dist/
+build/
+*.egg
+
+# IDE-specific files
+.vscode/
+.idea/
+*.iml
+
+# Pipenv and poetry
+Pipfile
+Pipfile.lock
+poetry.lock
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Secret files
+.env
+*.pem
