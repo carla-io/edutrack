@@ -1,0 +1,90 @@
+.landing-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background-color: #600000;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.content {
+    max-width: 700px;
+    padding: 20px;
+}
+
+.title-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;  /* Reduced gap for better fit */
+    margin-bottom: 30px;
+}
+
+.open-book-icon {
+    font-size: 80px;  /* Reduced size to fit better */
+    color: white;
+}
+
+.title-text {
+    text-align: left;
+    line-height: 0.9;
+}
+
+.heading {
+    font-size: 3rem;  /* Adjusted to fit the screen */
+    font-weight: bold;
+    letter-spacing: 2px;
+    margin-bottom: 5px;
+}
+
+.tagline {
+    margin-top: 20px;
+    font-style: italic;
+    font-family: 'Lucida Handwriting', cursive;
+    font-size: 1.4rem;  /* Reduced to avoid scroll */
+    line-height: 1.5;
+    color: #ffcccb;
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
+}
+
+.button-container {
+    margin-top: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;  /* Adjusted spacing */
+}
+
+.start-button {
+    width: 250px;  /* Medium-long rectangle */
+    padding: 14px 0;
+    background-color: #D32F2F;
+    color: white;
+    font-size: 1.6rem;  /* Slightly smaller for better layout */
+    font-weight: bold;
+    border-radius: 6px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    border: none;
+    cursor: pointer;
+    text-align: center;
+}
+
+.start-button:hover {
+    background-color: #C62828;
+    transform: translateY(-2px);
+}
+
+.user-icon-left {
+    font-size: 40px;  /* Adjusted icon size */
+    color: white;
+}
+
+.journey-text {
+    margin-top: 20px;
+    font-size: 1.3rem;  /* Adjusted for consistency */
+    font-weight: 500;
+}
