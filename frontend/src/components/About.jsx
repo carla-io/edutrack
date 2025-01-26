@@ -2,7 +2,7 @@ import React from "react";
 import "../components/css/About.css";
 import Nav2 from "./Nav2";
 import Footer from "./Footer";
-import bookImage from "../assets/book.png"; // Ensure the correct path to your book image
+import bookImage from "../assets/books-icon.jpg"; // Ensure the correct path to your book image
 
 const About = () => {
   return (
