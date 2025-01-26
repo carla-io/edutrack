@@ -3,6 +3,7 @@ import { FaBars, FaBookOpen } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import '../components/css/Navbar.css';
 
+
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -34,6 +35,10 @@ function Navbar() {
           </li>
           <li className="nav-item">
             <Link to="/About" className="nav-link">About</Link>
+          </li>
+
+          <li className="nav-item">
+            <Link to="/user-profile" className="nav-link">User Profile</Link>
           </li>
         </ul>
       </nav>

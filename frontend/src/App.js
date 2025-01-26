@@ -1,9 +1,8 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import LandingPage from './components/LandingPage'; // Import LandingPage component
-import Login from './components/LoginPage'; // Import LoginSignup component
-import Navbar from './components/Navbar'; // Import Navbar component
-import Register from './components/RegisterPage'; // Import Register component
+import LandingPage from './components/LandingPage'; 
+import Login from './components/LoginPage'; 
+import Register from './components/RegisterPage'; 
 import UserProfile from './components/UserProfile';
 import About from './components/About';
 
@@ -12,7 +11,7 @@ function App() {
     <div>
       <BrowserRouter>
         {/* Include Navbar, it will show only on /login */}
-        <Navbar />
+      
         
         <Routes>
           {/* Landing Page Route */}
@@ -27,6 +26,7 @@ function App() {
           <Route path='/about' element={<About />} />
         </Routes>
       </BrowserRouter>
+
     </div>
   );
 }

@@ -1,0 +1,131 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  /* Top nav2bar2 */
+  .top-navbar2 {
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    height: 60px;
+    position: fixed;
+    width: 100%;
+    z-index: 10;
+    background-color: transparent; /* No background */
+  }
+  
+  .navbar2-content {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
+  
+  .hamburger2 {
+    cursor: pointer;
+    color: maroon;
+    margin-top: 60px;
+    margin-left: 20px;
+  }
+  
+  .navbar2-logo {
+    margin-top: 60px;
+    display: flex;
+    align-items: center;
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: maroon;
+    margin-left: 30px;
+  }
+  
+  .navbar2-icon {
+    margin-right: 10px;
+    font-size: 2rem;
+    color:maroon;
+  }
+  
+  /* sidebar2 */
+  .sidebar2 {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    position: fixed;
+    top: 60px;
+    left: 0;
+    width: 250px;
+    transition: transform 0.3s ease;
+    transform: translateX(0);
+    z-index: 5; /* Keep it above content */
+  }
+  
+  .sidebar2.collapsed {
+    transform: translateX(-250px); /* Hide sidebar2 when collapsed */
+  }
+  
+  .nav2-list {
+    list-style-type: none;
+    margin: 20px;
+    padding: 0;
+    margin-top: 60px;
+    margin-left: 20px;
+  }
+  
+  .nav2-item {
+    margin-bottom: 15px;
+    margin-left: 10px;
+    margin-top: 10px;
+  }
+  
+  .nav2-link {
+    color:maroon;
+    text-decoration: none;
+    font-size: 1.2rem;
+    transition: color 0.3s;
+  }
+  
+  .nav2-link:hover {
+    color: #07070729; /* Subtle hover effect */
+  }
+  
+  /* Media Queries for Responsiveness */
+  
+  /* For smaller screens (Tablets and below) */
+  @media (max-width: 768px) {
+    .navbar2-logo {
+      margin-left: 10px;
+    }
+  
+    .hamburger2 {
+      margin-left: 10px;
+    }
+  
+    .sidebar2 {
+      width: 200px; /* Smaller sidebar2 for mobile */
+    }
+  
+    .sidebar2.collapsed {
+      transform: translateX(-200px); /* Hide sidebar2 */
+    }
+  
+    .nav2-list {
+      margin-top: 0;
+    }
+  }
+  
+  /* For very small screens (Mobile phones) */
+  @media (max-width: 480px) {
+    .top-navbar2 {
+      padding: 0 10px; /* Adjust padding for mobile */
+    }
+  
+    .sidebar2 {
+      width: 180px; /* Even smaller sidebar2 for mobile */
+    }
+  
+    .navbar2-logo {
+      font-size: 1.5rem;
+    }
+  }
+  

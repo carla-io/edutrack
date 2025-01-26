@@ -1,9 +1,12 @@
 import React from "react";
 import { FaAddressCard } from "react-icons/fa6";  // Import the address card icon
 import '../components/css/LoginPage.css';
+import Navbar from "./Navbar";
 
 const LoginPage = () => {
   return (
+    <>
+    <Navbar/>
     <div className="login-container">
       <div className="login-wrapper">
         <div className="login-card">
@@ -48,6 +51,7 @@ const LoginPage = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 

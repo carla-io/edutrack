@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import '../components/css/UserProfile.css';
+import Navbar from "./Navbar";
 
 const UserProfile = () => {
   const [image, setImage] = useState(null);
@@ -16,6 +17,8 @@ const UserProfile = () => {
   };
 
   return (
+    <>
+    <Navbar/>
     <div className="user-container">
       <div className="user-content">
         <div className="user-card">
@@ -24,9 +27,7 @@ const UserProfile = () => {
           </div>
 
           <h1 className="user-heading">USER PROFILE</h1>
-          <p className="user-link">
-            Already usered? <a href="/login">Login</a>
-          </p>
+          
 
           <form>
             <div className="form-group">
@@ -99,6 +100,7 @@ const UserProfile = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 

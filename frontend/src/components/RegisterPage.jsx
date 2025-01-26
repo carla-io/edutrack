@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import '../components/css/RegisterPage.css';
+import Navbar from "./Navbar";
 
 const RegisterPage = () => {
   const [image, setImage] = useState(null);
@@ -16,6 +17,8 @@ const RegisterPage = () => {
   };
 
   return (
+    <>
+    <Navbar/>
     <div className="register-container">
       <div className="register-content">
         <div className="register-card">
@@ -99,6 +102,8 @@ const RegisterPage = () => {
         </div>
       </div>
     </div>
+
+    </>
   );
 };
 

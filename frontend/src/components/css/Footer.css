@@ -1,0 +1,17 @@
+.footer {
+    background-color: maroon;
+    color: white;
+    text-align: center;
+    padding: 20px 0;
+    font-size: 1rem;
+    font-weight: bold;
+    position: relative;
+    width: 100%;
+    bottom: 0;
+  }
+  
+  .footer-brand {
+    font-weight: bold;
+    font-size: 1.2rem;
+  }
+  

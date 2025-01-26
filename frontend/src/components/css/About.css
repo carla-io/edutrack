@@ -1,0 +1,82 @@
+/* Centering the entire content */
+.about-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Full viewport height */
+    padding: 50px 20px;
+    background-color: #f9f9f9;
+  }
+  
+  /* Container to align text and image */
+  .about-content {
+    display: flex;
+    align-items: center;
+    max-width: 1200px;
+    background: #ffffff;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    padding: 50px;
+    border-radius: 10px;
+    margin-bottom: -100px;
+    margin-top: -100px;
+  }
+  
+  /* Text content styling */
+  .text-content {
+    flex: 1;
+    padding-right: 40px;
+  }
+  
+  .text-content h1 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #000;
+    text-transform: uppercase;
+    border-bottom: 3px solid maroon;
+    display: inline-block;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .text-content p {
+    font-size: 1.rem;
+    color: #333;
+    line-height: 1.8;
+    margin-bottom: 20px;
+    font-weight: bold;
+  }
+  
+  /* Image styling */
+  .image-container {
+    flex: 1;
+    text-align: right;
+  }
+  
+  .book-image {
+    max-width: 1000%;
+    height: auto;
+    max-height: 500px; /* Increase size */
+    border-radius: 10px;
+  }
+  
+  /* Responsive design */
+  @media (max-width: 992px) {
+    .about-content {
+      flex-direction: column;
+      text-align: center;
+    }
+  
+    .text-content {
+      padding-right: 0;
+    }
+  
+    .image-container {
+      text-align: center;
+      margin-top: 20px;
+    }
+  
+    .book-image {
+      max-height: 300px;
+    }
+  }
+  
