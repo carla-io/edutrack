@@ -1,17 +1,37 @@
+/* Ensure html and body take full height */
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/* Page wrapper to handle layout */
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Full viewport height */
+}
+
+/* Main content should expand to push footer down */
+.main-content {
+  flex: 1;  /* Takes available space, pushing footer down */
+  padding: 20px;
+}
+
+/* Footer styles */
 .footer {
-    background-color: maroon;
-    color: white;
-    text-align: center;
-    padding: 20px 0;
-    font-size: 1rem;
-    font-weight: bold;
-    position: relative;
-    width: 100%;
-    bottom: 0;
-  }
-  
-  .footer-brand {
-    font-weight: bold;
-    font-size: 1.2rem;
-  }
-  
+  background-color: maroon;
+  color: white;
+  text-align: center;
+  padding: 20px 0;
+  font-size: 1rem;
+  font-weight: bold;
+  width: 100%;
+  position: relative;
+  bottom: 0;
+}
+
+.footer-brand {
+  font-weight: bold;
+  font-size: 1.2rem;
+}

@@ -28,7 +28,7 @@ function Navbar() {
       <nav className={`sidebar ${isOpen ? 'expanded' : 'collapsed'}`}>
         <ul className="nav-list">
           <li className="nav-item">
-            <Link to="/" className="nav-link">Home</Link>
+            <Link to="/dashboard" className="nav-link">Home</Link>
           </li>
           <li className="nav-item">
             <Link to="/login" className="nav-link">Login</Link>
