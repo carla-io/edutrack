@@ -102,14 +102,14 @@ const Dashboard = () => {
             </div>
 
             <div className="instruction">
-              <img src={personalImg} alt="Select Portal" />
+              <img src={personalImg} alt="Personal Questions" />
               <p>
               Following this, you will be required to answer a series of personal questions designed to provide insights that can influence your decision-making process in choosing the right strand, course, or career.
               </p>
             </div>
 
             <div className="instruction">
-              <img src={examImg} alt="Select Portal" />
+              <img src={examImg} alt="Exam" />
               <p>
               Finally, to ensure a comprehensive evaluation, you will take subject-based exams that assess your knowledge and skills, helping to refine and personalize your future predictions.
               </p>
@@ -118,7 +118,8 @@ const Dashboard = () => {
             
           </div>
 
-          <button className="Button">Start the Process  </button>
+          <button className="Button" onClick={() => window.location.href = '/portal'}>Start the Process</button>
+
         </div>
       </div>
       <Footer />

@@ -48,6 +48,8 @@
     margin-bottom: 20px;
     margin-top: 10px;
     width: 20vh;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
   }
 
   .instructions-container {
