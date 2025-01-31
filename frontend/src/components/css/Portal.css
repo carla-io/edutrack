@@ -5,12 +5,7 @@
     text-align: center;
 }
 
-.portal-container h1 {
-    font-size: 35px;
-    margin-bottom: 20px;
-    text-align: left;
-    margin-top: 100px;
-}
+
 
 .portal-grid {
     display: grid;
@@ -20,8 +15,8 @@
     max-width: 1000px;
     margin: 0 auto;
     justify-content: center; /* Center grid items */
-    margin-top: 50px;
-    margin-bottom: 15px;
+    margin-top: 100px;
+    margin-bottom: 30px;
 }
 
 .portal-grid .portal {
@@ -46,7 +41,7 @@
 }
 
 .portal h2 {
-    font-size:25px;
+    font-size:30px;
     color: #333;
     font-weight: bold;
     margin-top: 20px;
