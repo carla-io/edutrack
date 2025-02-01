@@ -17,7 +17,7 @@ const Portal = () => {
             <h2>For Incoming Senior High School</h2>
             <img src={shsImg} alt="Select Portal" />
             
-            <button className="portal-btn" onClick={() => window.location.href = '/shs-portal'}>Predict Your Strand</button>
+            <button className="portal-btn" onClick={() => window.location.href = '/documents'}>Predict Your Strand</button>
           </div>
 
           <div className="portal">
