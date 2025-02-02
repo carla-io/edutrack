@@ -14,7 +14,7 @@ const Portal = () => {
         <h1>Portal</h1>
         <div className="portal-grid">
           <div className="portal">
-            <h2>For Incoming Senior High School</h2>
+            <h2>For Incoming Senior HighSchool</h2>
             <img src={shsImg} alt="Select Portal" />
             
             <button className="portal-btn" onClick={() => window.location.href = '/documents'}>Predict Your Strand</button>
@@ -24,14 +24,14 @@ const Portal = () => {
             <h2>For Incoming College</h2>
             <img src={collegeImg} alt="Upload Grades" />
            
-            <button className="portal-btn" onClick={() => window.location.href = '/college-portal'}>Predict Your Course</button>
+            <button className="portal-btn" onClick={() => window.location.href = '/documents'}>Predict Your Course</button>
           </div>
 
           <div className="portal">
             <h2>For Your Future Career</h2>
             <img src={careerImg} alt="Upload Certificates" />
             
-            <button className="portal-btn" onClick={() => window.location.href = '/career-portal'}>Predict Your Career</button>
+            <button className="portal-btn" onClick={() => window.location.href = '/documents'}>Predict Your Career</button>
           </div>
         </div>
       </div>

@@ -74,7 +74,7 @@ const Dashboard = () => {
           <Bar data={othersData} />
         </div>
 
-        <button className="Button">View Result</button>
+        <button className="Button" onClick={() => window.location.href = '/results'}>View Result</button>
 
         {/* Instructions Section */}
         <div className="instructions-container">

@@ -80,6 +80,17 @@ body {
     border-radius: 5px;
 }
 
+.next-button{
+    background-color: #7a0e0e;
+    color: white;
+    border: none;
+    padding: 12px 50px;
+    cursor: pointer;
+    font-size: 14px;
+    border-radius: 5px;
+    margin-top: 30px;
+}
+
 .upload-button:hover {
     background-color: #600b0b;
 }
