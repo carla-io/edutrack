@@ -21,13 +21,13 @@ const Dashboard = () => {
     const fetchUserProfile = async () => {
       const token = localStorage.getItem("auth-token");
       if (!token) {
-        console.error("No token found");
+        console.log("No token found");
+        setLoading(false);
         return;
       }
 
       try {
         const response = await axios.post("http://localhost:4000/api/auth/user", { token });
-        console.log("User Data:", response.data); // Debugging line
         setUser({
           name: response.data.user.name,
           gradeLevel: response.data.user.gradeLevel
@@ -89,39 +89,49 @@ const Dashboard = () => {
     <>
       <Nav2 />
       <div className="dashboard-container">
+        {/* Check if the user is logged in */}
         <div className="profile-header">
-          <h2>{user.name || "User Name"}</h2>
+          <h2>{user.name ? user.name : "Guest"}</h2>
           <p>
-            Current Grade/Year: <strong>{user.gradeLevel || "Grade Level"}</strong>
+            Current Grade/Year: <strong>{user.gradeLevel ? user.gradeLevel : "Log in first"}</strong>
           </p>
         </div>
 
+        {/* Instructions Section */}
         <p className="description">
           Explore insightful predictions for your future strand, course, and career based on your profile. View the graphical analysis below, and click the button to see complete results.
         </p>
 
         <div className="charts-container">
-          <div className="chart">
-            <h3>Academic Track</h3>
-            <Bar data={academicData} />
-          </div>
+          {/* Only show charts if user is logged in */}
+          {user.name ? (
+            <>
+              <div className="chart">
+                <h3>Academic Track</h3>
+                <Bar data={academicData} />
+              </div>
 
-          <div className="chart">
-            <h3>TVL Track</h3>
-            <Bar data={tvlData} />
-          </div>
-        </div>
+              <div className="chart">
+                <h3>TVL Track</h3>
+                <Bar data={tvlData} />
+              </div>
 
-        <div className="chart full-width">
-          <h3>Others</h3>
-          <Bar data={othersData} />
+              <div className="chart full-width">
+                <h3>Others</h3>
+                <Bar data={othersData} />
+              </div>
+            </>
+          ) : (
+            <div className="guest-message">
+              <p>Please log in to see your personalized results and predictions.</p>
+            </div>
+          )}
         </div>
 
         <button className="Button" onClick={() => window.location.href = '/results'}>
           View Result
         </button>
 
-        {/* Instructions Section */}
         <div className="instructions-container">
           <h2>Instructions</h2>
           <div className="instructions-grid">

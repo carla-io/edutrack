@@ -89,6 +89,34 @@
   color: #f4a261; /* Subtle hover effect */
 }
 
+/* Ensure navbar-content is a flex container */
+.navbar-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+/* Container for the logout button */
+.logout-container {
+  margin-left: auto; /* This will push the logout button to the right */
+}
+
+/* Logout button styles */
+.logout-button {
+  padding: 8px 16px;
+  background-color: #ff6347; /* Red color */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.logout-button:hover {
+  background-color: #ff4500;
+}
+
+
 /* Media Queries for Responsiveness */
 
 /* For smaller screens (Tablets and below) */
