@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import '../components/css/UserProfile.css';
 import Navbar from "./Navbar";
+import { toast, ToastContainer } from 'react-toastify';  // Import toast and ToastContainer
+import 'react-toastify/dist/ReactToastify.css';  // Import the styles
 
 const UserProfile = () => {
   const [image, setImage] = useState(null);
@@ -82,8 +84,10 @@ const UserProfile = () => {
       );
 
       console.log("Profile updated successfully:", response.data);
+      toast.success('Profile updated successfully!'); // Show success toast
     } catch (error) {
       console.error("Error updating profile:", error.response?.data || error.message);
+      toast.error('Error updating profile'); // Show error toast
     }
   };
 
@@ -179,6 +183,9 @@ const UserProfile = () => {
           {error && <div className="error-message">{error}</div>}
         </div>
       </div>
+
+      {/* Add ToastContainer here to display the toasts */}
+      <ToastContainer />
     </>
   );
 };

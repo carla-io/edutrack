@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 import Navbar from "./Navbar";
 import "../components/css/LoginPage.css";
 import { FaAddressCard } from "react-icons/fa6";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const LoginPage = () => {
   const [formData, setFormData] = useState({
@@ -35,17 +37,27 @@ const LoginPage = () => {
   
       console.log("Login successful:", response.data);
   
+      // Display success toast
+      toast.success("Login successful!", { position: "top-right", autoClose: 3000 });
+
       // Redirect to user profile
       navigate("/user-profile");
   
     } catch (error) {
       console.error("Login error:", error.response?.data || error.message);
+      
+      // Display error toast
+      toast.error(error.response?.data?.message || "Login failed! Please try again.", {
+        position: "top-right",
+        autoClose: 3000
+      });
     }
   };
 
   return (
     <>
       <Navbar />
+      <ToastContainer />
       <div className="login-container">
         <div className="login-wrapper">
           <div className="login-card">

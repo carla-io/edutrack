@@ -71,7 +71,7 @@ const RegisterPage = () => {
   return (
     <>
       <Navbar />
-      <ToastContainer />
+      <ToastContainer /> {/* Add ToastContainer here */}
       <div className="register-container">
         <div className="register-content">
           <div className="register-card">
