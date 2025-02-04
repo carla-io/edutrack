@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Bar } from "react-chartjs-2";
 import "chart.js/auto";
 import "../components/css/Dashboard.css";
@@ -9,8 +9,41 @@ import uploadImg from "../assets/upload.png";
 import certificateImg from "../assets/certificate.png";
 import personalImg from "../assets/personal.png";
 import examImg from "../assets/exam.png";
+import axios from "axios";
 
 const Dashboard = () => {
+  const [user, setUser] = useState({ name: "", gradeLevel: "" });
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  // Fetch user data
+  useEffect(() => {
+    const fetchUserProfile = async () => {
+      const token = localStorage.getItem("auth-token");
+      if (!token) {
+        console.error("No token found");
+        return;
+      }
+
+      try {
+        const response = await axios.post("http://localhost:4000/api/auth/user", { token });
+        console.log("User Data:", response.data); // Debugging line
+        setUser({
+          name: response.data.user.name,
+          gradeLevel: response.data.user.gradeLevel
+        });
+      } catch (err) {
+        console.error("Error fetching user:", err.response?.data || err);
+        setError("Failed to fetch user data");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchUserProfile();
+  }, []);
+
+  // Chart data
   const academicData = {
     labels: ["GAS", "ABM", "HUMSS", "STEM"],
     datasets: [
@@ -44,13 +77,23 @@ const Dashboard = () => {
     ],
   };
 
+  if (loading) {
+    return <div>Loading...</div>; // Show loading state while data is being fetched
+  }
+
+  if (error) {
+    return <div>Error: {error}</div>; // Show error if any
+  }
+
   return (
     <>
       <Nav2 />
       <div className="dashboard-container">
         <div className="profile-header">
-          <h2>Charles Bulante</h2>
-          <p>Current Grade/Year: <strong>Junior High School</strong></p>
+          <h2>{user.name || "User Name"}</h2>
+          <p>
+            Current Grade/Year: <strong>{user.gradeLevel || "Grade Level"}</strong>
+          </p>
         </div>
 
         <p className="description">
@@ -74,7 +117,9 @@ const Dashboard = () => {
           <Bar data={othersData} />
         </div>
 
-        <button className="Button" onClick={() => window.location.href = '/results'}>View Result</button>
+        <button className="Button" onClick={() => window.location.href = '/results'}>
+          View Result
+        </button>
 
         {/* Instructions Section */}
         <div className="instructions-container">
@@ -104,22 +149,21 @@ const Dashboard = () => {
             <div className="instruction">
               <img src={personalImg} alt="Personal Questions" />
               <p>
-              Following this, you will be required to answer a series of personal questions designed to provide insights that can influence your decision-making process in choosing the right strand, course, or career.
+                Following this, you will be required to answer a series of personal questions designed to provide insights that can influence your decision-making process in choosing the right strand, course, or career.
               </p>
             </div>
 
             <div className="instruction">
               <img src={examImg} alt="Exam" />
               <p>
-              Finally, to ensure a comprehensive evaluation, you will take subject-based exams that assess your knowledge and skills, helping to refine and personalize your future predictions.
+                Finally, to ensure a comprehensive evaluation, you will take subject-based exams that assess your knowledge and skills, helping to refine and personalize your future predictions.
               </p>
             </div>
-
-            
           </div>
 
-          <button className="Button" onClick={() => window.location.href = '/portal'}>Start the Process</button>
-
+          <button className="Button" onClick={() => window.location.href = '/portal'}>
+            Start the Process
+          </button>
         </div>
       </div>
       <Footer />
