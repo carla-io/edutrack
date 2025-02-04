@@ -89,6 +89,41 @@
   .nav2-link:hover {
     color: #07070729; /* Subtle hover effect */
   }
+
+  /* Container for the logout button */
+.logout-container {
+  margin-left: auto; /* This will push the logout button to the right */
+}
+
+/* Enhanced Logout button styles */
+.logout-button {
+  padding: 10px 20px;
+  background-color: maroon; /* Soft orange color to complement the navbar */
+  color: white;
+  border: none;
+  border-radius: 8px; /* Rounded corners for a more modern look */
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+.logout-button:hover {
+  background-color: #e07b53; /* Slightly darker shade on hover */
+  transform: translateY(-2px); /* Button lifts on hover */
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15); /* Enhance shadow on hover */
+}
+
+.logout-button:focus {
+  outline: none; /* Remove outline when focused */
+}
+
+.logout-button:active {
+  transform: translateY(1px); /* Button presses down when clicked */
+}
+
   
   /* Media Queries for Responsiveness */
   

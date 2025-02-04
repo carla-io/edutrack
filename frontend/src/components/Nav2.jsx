@@ -1,13 +1,26 @@
 import React, { useState } from 'react';
 import { FaBars, FaBookOpen } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import '../components/css/Nav2.css';
 
 
 function Nav2() {
   const [isOpen, setIsOpen] = useState(false);
+  const navigate = useNavigate();  
 
   const toggleMenu = () => setIsOpen(!isOpen);
+
+  const handleLogout = () => {
+    // Clear token and user data from localStorage or sessionStorage
+    localStorage.removeItem('auth-token');
+        localStorage.removeItem('user'); // If stored in sessionStorage, clear that too
+
+    // Optionally, you can clear other user-related data like profile info or user state
+
+    // Redirect to the login page after logging out
+    navigate('/login');  // use navigate instead of history.push
+  };
+
 
   return (
     <>
@@ -22,6 +35,12 @@ function Nav2() {
             <span className="navbar2-title">EDUTRACKER</span>
           </div>
         </div>
+
+         {/* Logout Button on the right */}
+         <div className="logout-container">
+            <button className="logout-button" onClick={handleLogout}>Logout</button>
+          </div>
+       
       </header>
 
       {/* sidebar2 */}
