@@ -52,17 +52,20 @@ const Dashboard = () => {
       <div className="dashboard-container">
         {/* Profile Header with Image */}
         <div className="profile-header">
-          <div className="profile-info">
-            <h2>{user.name || "Guest"}</h2>
-            <p>Current Grade/Year: <strong>{user.gradeLevel || "Log in first"}</strong></p>
-          </div>
-          {/* <div className="profile-image">
-            <img
-              src={user.profilePicture || "https://via.placeholder.com/100"}
-              alt="Profile"
-            />
-          </div> */}
-        </div>
+  <div className="profile-info">
+    <div className="profile-image-container">
+      <img 
+        src={user.profilePicture?.url || "path/to/default-avatar.png"} 
+        alt="Profile" 
+        className="profile-image"
+      />
+    </div>
+    <div className="profile-text">
+      <h2>{user.name || "Guest"}</h2>
+      <p>Current Grade/Year: <strong>{user.gradeLevel || "Log in first"}</strong></p>
+    </div>
+  </div>
+</div>
 
         {/* Dashboard Content */}
         <p className="description">

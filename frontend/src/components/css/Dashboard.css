@@ -1,129 +1,161 @@
 .dashboard-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
-    text-align: center;
-  }
-  
-  .profile-header {
-    background-color: #800000;
-    color: white;
-    padding: 15px;
-    border-radius: 5px;
-    margin-bottom: 20px;
-    margin-top: 100px;
-    width: 50vh;
-  }
-  
-  .description {
-    font-size: 16px;
-    margin-bottom: 30px;
-  }
-  
-  .charts-container {
-    display: flex;
-    justify-content: center;
-    gap: 30px;
-    flex-wrap: wrap;
-  }
-  
-  .chart {
-    background: white;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-    width: 45%;
-  }
-  
-  .full-width {
-    width: 60%;
-    margin: 30px auto;
-  }
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  text-align: center;
+}
 
-  .Button{
-    background-color: #800000;
-    color: white;
-    padding: 15px;
-    border-radius: 5px;
-    margin-bottom: 20px;
-    margin-top: 10px;
-    width: 20vh;
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-  }
+.profile-header {
+  background-color: #800000;
+  color: white;
+  padding: 15px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  margin-top: 100px;
+  width: 50vh;
+  display: flex;
+  align-items: center; /* Aligns the profile info and image in the center vertically */
+}
 
-  .instructions-container {
-    margin-top: 40px;
-    text-align: center;
+.profile-info {
+  display: flex;
+  align-items: center;
+  gap: 15px; /* Space between the profile image and text */
+}
+
+.profile-image-container {
+  width: 50px; /* Adjust the size of the profile image */
+  height: 50px;
+}
+
+.profile-image {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover; /* Ensures the image fits within the circular container */
+}
+
+.profile-text {
+  text-align: left; /* Align text to the left */
+}
+
+.profile-text h2 {
+  margin: 0;
+  font-size: 1.5rem;
+  
+}
+
+.profile-text p {
+  margin: 0;
+  font-size: 1rem;
+}
+
+.description {
+  font-size: 16px;
+  margin-bottom: 30px;
+}
+
+.charts-container {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+
+.chart {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  width: 45%;
+}
+
+.full-width {
+  width: 60%;
+  margin: 30px auto;
+}
+
+.Button {
+  background-color: #800000;
+  color: white;
+  padding: 15px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  margin-top: 10px;
+  width: 20vh;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.instructions-container {
+  margin-top: 40px;
+  text-align: center;
 }
 
 .instructions-container h2 {
-    font-size: 35px;
-    margin-bottom: 20px;
-    text-align: left;
+  font-size: 35px;
+  margin-bottom: 20px;
+  text-align: left;
 }
 
 .instructions-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive columns */
-    gap: 30px; 
-    text-align: center;
-    max-width: 1000px;
-    margin: 0 auto;
-    justify-content: center; /* Center grid items */
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive columns */
+  gap: 30px;
+  text-align: center;
+  max-width: 1000px;
+  margin: 0 auto;
+  justify-content: center; /* Center grid items */
 }
 
 .instructions-grid .instruction {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .instruction {
-    background: white;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-    
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-
 .instruction img {
-    width: 310px;
-    height: 200px;
-    object-fit: contain;
-    margin-bottom: 10px;
+  width: 310px;
+  height: 200px;
+  object-fit: contain;
+  margin-bottom: 10px;
 }
 
 .instruction p {
-    font-size: 14px;
-    color: #333;
-    font-weight: bold;
+  font-size: 14px;
+  color: #333;
+  font-weight: bold;
 }
 
 .instructions-grid::after {
-    content: "";
-    display: block;
-    grid-column: span 3; /* Keeps the last row centered */
+  content: "";
+  display: block;
+  grid-column: span 3; /* Keeps the last row centered */
 }
-  
-  @media (max-width: 768px) {
-    .charts-container {
-      flex-direction: column;
-      align-items: center;
-    }
-    .chart {
-      width: 90%;
-    }
 
-    .instructions-grid {
-        grid-template-columns: 1fr;
-        gap: 20px;
-    }
-
-    .instruction img {
-        width: 310px;
-        height: 200px;
-    }
+@media (max-width: 768px) {
+  .charts-container {
+    flex-direction: column;
+    align-items: center;
   }
-  
+  .chart {
+    width: 90%;
+  }
+
+  .instructions-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .instruction img {
+    width: 310px;
+    height: 200px;
+  }
+}
