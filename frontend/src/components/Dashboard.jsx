@@ -4,19 +4,18 @@ import "chart.js/auto";
 import "../components/css/Dashboard.css";
 import Footer from "./Footer";
 import Nav2 from "./Nav2";
+import axios from "axios";
 import portalImg from "../assets/portal.png";
 import uploadImg from "../assets/upload.png";
 import certificateImg from "../assets/certificate.png";
 import personalImg from "../assets/personal.png";
 import examImg from "../assets/exam.png";
-import axios from "axios";
 
 const Dashboard = () => {
-  const [user, setUser] = useState({ name: "", gradeLevel: "" });
+  const [user, setUser] = useState({ name: "", gradeLevel: "", profilePicture: "" });
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // Fetch user data
   useEffect(() => {
     const fetchUserProfile = async () => {
       const token = localStorage.getItem("auth-token");
@@ -30,7 +29,8 @@ const Dashboard = () => {
         const response = await axios.post("http://localhost:4000/api/auth/user", { token });
         setUser({
           name: response.data.user.name,
-          gradeLevel: response.data.user.gradeLevel
+          gradeLevel: response.data.user.gradeLevel,
+          profilePicture: response.data.user.profilePicture, // Cloudinary image URL
         });
       } catch (err) {
         console.error("Error fetching user:", err.response?.data || err);
@@ -43,82 +43,56 @@ const Dashboard = () => {
     fetchUserProfile();
   }, []);
 
-  // Chart data
-  const academicData = {
-    labels: ["GAS", "ABM", "HUMSS", "STEM"],
-    datasets: [
-      {
-        label: "Percentage",
-        data: [40, 50, 60, 80],
-        backgroundColor: ["#800000", "#B22222", "#DC143C", "#FF6347"],
-      },
-    ],
-  };
-
-  const tvlData = {
-    labels: ["HE", "ICT", "Agri-Fishery Arts"],
-    datasets: [
-      {
-        label: "Percentage",
-        data: [30, 40, 60],
-        backgroundColor: ["#4682B4", "#4169E1", "#1E90FF"],
-      },
-    ],
-  };
-
-  const othersData = {
-    labels: ["Arts and Design Track", "Sports Track"],
-    datasets: [
-      {
-        label: "Percentage",
-        data: [50, 10],
-        backgroundColor: ["#8A2BE2", "#32CD32"], // Purple & Green
-      },
-    ],
-  };
-
-  if (loading) {
-    return <div>Loading...</div>; // Show loading state while data is being fetched
-  }
-
-  if (error) {
-    return <div>Error: {error}</div>; // Show error if any
-  }
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error}</div>;
 
   return (
     <>
       <Nav2 />
       <div className="dashboard-container">
-        {/* Check if the user is logged in */}
+        {/* Profile Header with Image */}
         <div className="profile-header">
-          <h2>{user.name ? user.name : "Guest"}</h2>
-          <p>
-            Current Grade/Year: <strong>{user.gradeLevel ? user.gradeLevel : "Log in first"}</strong>
-          </p>
+          <div className="profile-info">
+            <h2>{user.name || "Guest"}</h2>
+            <p>Current Grade/Year: <strong>{user.gradeLevel || "Log in first"}</strong></p>
+          </div>
+          {/* <div className="profile-image">
+            <img
+              src={user.profilePicture || "https://via.placeholder.com/100"}
+              alt="Profile"
+            />
+          </div> */}
         </div>
 
-        {/* Instructions Section */}
+        {/* Dashboard Content */}
         <p className="description">
-          Explore insightful predictions for your future strand, course, and career based on your profile. View the graphical analysis below, and click the button to see complete results.
+          Explore insightful predictions for your future strand, course, and career based on your profile. 
         </p>
 
+        {/* Conditional Charts */}
         <div className="charts-container">
-          {/* Only show charts if user is logged in */}
           {user.name ? (
             <>
               <div className="chart">
                 <h3>Academic Track</h3>
-                <Bar data={academicData} />
+                <Bar data={{
+                  labels: ["GAS", "ABM", "HUMSS", "STEM"],
+                  datasets: [{ label: "Percentage", data: [40, 50, 60, 80], backgroundColor: ["#800000", "#B22222", "#DC143C", "#FF6347"] }]
+                }} />
               </div>
-
               <div className="chart">
                 <h3>TVL Track</h3>
-                <Bar data={tvlData} />
+                <Bar data={{
+                  labels: ["HE", "ICT", "Agri-Fishery Arts"],
+                  datasets: [{ label: "Percentage", data: [30, 40, 60], backgroundColor: ["#4682B4", "#4169E1", "#1E90FF"] }]
+                }} />
               </div>
-
               <div className="chart full-width">
                 <h3>Others</h3>
-                <Bar data={othersData} />
+                <Bar data={{
+                  labels: ["Arts and Design Track", "Sports Track"],
+                  datasets: [{ label: "Percentage", data: [50, 10], backgroundColor: ["#8A2BE2", "#32CD32"] }]
+                }} />
               </div>
             </>
           ) : (
@@ -132,7 +106,7 @@ const Dashboard = () => {
           View Result
         </button>
 
-        <div className="instructions-container">
+         <div className="instructions-container">
           <h2>Instructions</h2>
           <div className="instructions-grid">
             <div className="instruction">
@@ -175,6 +149,7 @@ const Dashboard = () => {
             Start the Process
           </button>
         </div>
+  
       </div>
       <Footer />
     </>

@@ -16,6 +16,9 @@ const UserProfile = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [profilePictureUrl, setProfilePictureUrl] = useState('path/to/default-avatar.png'); // Default profile picture
+  const [newUsername, setNewUsername] = useState('');
+  const [newEmail, setNewEmail] = useState('');
+  const [newProfilePicture, setNewProfilePicture] = useState(null);
 
   useEffect(() => {
     const fetchUserProfile = async () => {
@@ -31,8 +34,6 @@ const UserProfile = () => {
         const response = await axios.post('http://localhost:4000/api/auth/user', { token });
         console.log("User Data:", response.data);  // Debugging line
         setUser(response.data.user);
-        
-        // Fetch the profile picture URL from response and set it
         setProfilePictureUrl(response.data.user.profilePicture?.url || 'path/to/default-avatar.png'); // Default if no image
       } catch (err) {
         console.error("Error fetching user:", err.response?.data || err);
@@ -50,46 +51,67 @@ const UserProfile = () => {
     if (file) {
       const reader = new FileReader();
       reader.onloadend = () => {
-        setImage(reader.result); // Set the preview image
+        setImage(reader.result); // Preview image
+        setNewProfilePicture(file); // Update new profile picture to be sent
       };
       reader.readAsDataURL(file); // Convert file to base64
     }
   };
+  
 
   const handleChange = (e) => {
     setUser({ ...user, [e.target.id]: e.target.value });
   };
 
+  const handleUsernameChange = (e) => setNewUsername(e.target.value);
+  const handleEmailChange = (e) => setNewEmail(e.target.value);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
     const token = localStorage.getItem("auth-token");
-    console.log("Token retrieved for update:", token); // Debugging line
-
     if (!token) {
       console.error("No token found");
       return;
     }
-
+  
+    toast.info("Updating profile..."); // Show loading toast
+  
+    const formData = new FormData();
+    formData.append('name', user.name);
+    formData.append('email', user.email);
+    formData.append('gradeLevel', user.gradeLevel);
+    if (newProfilePicture) {
+      formData.append('profilePicture', newProfilePicture);
+    }
+  
     try {
       const response = await axios.put(
         `http://localhost:4000/api/auth/update-profile/${user._id}`,
-        user,
+        formData,
         {
           headers: {
             "Authorization": `Bearer ${token}`,
-            "Content-Type": "application/json"
+            "Content-Type": "multipart/form-data"
           }
         }
       );
-
+  
       console.log("Profile updated successfully:", response.data);
-      toast.success('Profile updated successfully!'); // Show success toast
+      setUser(response.data.user);
+      setProfilePictureUrl(`${response.data.user.profilePicture?.url}?t=${Date.now()}`);
+      toast.success('Profile updated successfully!');
     } catch (error) {
       console.error("Error updating profile:", error.response?.data || error.message);
-      toast.error('Error updating profile'); // Show error toast
+      toast.error('Error updating profile');
     }
   };
+  
+  
+  
+
+  if (loading) return <div><Navbar /><p>Loading...</p></div>;
+  if (error || !user) return <div><Navbar /><div className="no-user"><p>{error || 'No user information available.'}</p></div></div>;
 
   return (
     <>

@@ -118,7 +118,7 @@ const updateProfile = async (req, res) => {
         let profilePicture = user.profilePicture;
         if (req.file) {
             if (profilePicture?.public_id) {
-                await cloudinary.uploader.destroy(profilePicture.public_id);
+                await cloudinary.uploader.destroy(profilePicture.public_id); // Remove old image if exists
             }
             const result = await cloudinary.uploader.upload(req.file.path, {
                 folder: 'profile',
@@ -127,6 +127,7 @@ const updateProfile = async (req, res) => {
             });
             profilePicture = { public_id: result.public_id, url: result.secure_url };
         }
+        
 
         // Update user fields
         user.name = name || user.name;

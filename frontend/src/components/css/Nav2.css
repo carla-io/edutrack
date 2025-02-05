@@ -48,7 +48,7 @@
   
   /* sidebar2 */
   .sidebar2 {
-    display: flex;
+    display: flex;  
     flex-direction: column;
     height: 100vh;
     position: fixed;
@@ -92,7 +92,10 @@
 
   /* Container for the logout button */
 .logout-container {
-  margin-left: auto; /* This will push the logout button to the right */
+  margin-left: auto;
+  display: flex;
+  align-items: center; 
+  margin-top: 50px;
 }
 
 /* Enhanced Logout button styles */
