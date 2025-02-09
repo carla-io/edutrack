@@ -3,8 +3,8 @@
     align-items: center;
     justify-content: center;
     min-height: 100vh;
-    background-color: #600000;
-    color: white;
+    background-color: white;
+    color: maroon;
     text-align: center;
     padding: 20px;
     box-sizing: border-box;
@@ -25,7 +25,7 @@
 
 .open-book-icon {
     font-size: 80px;  /* Reduced size to fit better */
-    color: white;
+    color: maroon;
 }
 
 .title-text {
@@ -46,7 +46,7 @@
     font-family: 'Lucida Handwriting', cursive;
     font-size: 1.4rem;  /* Reduced to avoid scroll */
     line-height: 1.5;
-    color: #ffcccb;
+    color:maroon;
     text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
 }
 

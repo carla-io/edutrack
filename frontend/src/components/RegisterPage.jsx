@@ -29,7 +29,7 @@ const RegisterPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
     const data = new FormData();
     data.append("name", formData.name);
     data.append("email", formData.email);
@@ -38,27 +38,26 @@ const RegisterPage = () => {
     if (image) {
       data.append("profilePicture", image);
     }
-
+  
     try {
       const response = await axios.post("http://localhost:4000/api/auth/register", data, {
         headers: {
           "Content-Type": "multipart/form-data"
         }
       });
-
-      const { token, user } = response.data; // Assuming API returns a token and user info
-
+  
+      const { token, user } = response.data;
+  
       // Store token and user info in localStorage
       localStorage.setItem("auth-token", token);
       localStorage.setItem("user", JSON.stringify(user));
-
+  
+      // Success notification
       toast.success("Registration successful!", { position: "top-right", autoClose: 3000 });
-
+  
       console.log("Registration successful:", response.data);
 
-      // Redirect to user profile
-      navigate("/user-profile");
-
+  
     } catch (error) {
       console.error("Registration error:", error.response?.data || error.message);
       toast.error(error.response?.data?.message || "Registration failed! Please try again.", {
@@ -67,6 +66,7 @@ const RegisterPage = () => {
       });
     }
   };
+  
 
   return (
     <>
@@ -158,6 +158,8 @@ const RegisterPage = () => {
           </div>
         </div>
       </div>
+
+        <ToastContainer />
     </>
   );
 };

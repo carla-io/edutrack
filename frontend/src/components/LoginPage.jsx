@@ -40,8 +40,6 @@ const LoginPage = () => {
       // Display success toast
       toast.success("Login successful!", { position: "top-right", autoClose: 3000 });
 
-      // Redirect to user profile
-      navigate("/user-profile");
   
     } catch (error) {
       console.error("Login error:", error.response?.data || error.message);

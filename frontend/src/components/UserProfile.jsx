@@ -110,7 +110,7 @@ const UserProfile = () => {
   
   
 
-  if (loading) return <div><Navbar /><p>Loading...</p></div>;
+
   if (error || !user) return <div><Navbar /><div className="no-user"><p>{error || 'No user information available.'}</p></div></div>;
 
   return (

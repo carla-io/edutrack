@@ -1,7 +1,7 @@
 /* LoginPage.css */
 .login-container {
   min-height: 100vh;
-  background-color: #7b1111;
+  background-color: white;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -104,5 +104,5 @@
 
 .address-icon {
   font-size: 200px; /* Adjust the size of the icon */
-  color: white;
+  color: maroon;
 }

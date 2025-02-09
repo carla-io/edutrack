@@ -1,7 +1,7 @@
 /* RegisterPage.css */
 .register-container {
   min-height: 100vh;
-  background-color: #7b1111;
+  background-color: white;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -61,7 +61,7 @@
 .form-input {
   width: 75%;
   padding: 12px;
-  border: 1px solid white;
+  border: 1px solid maroon;
   border-radius: 4px;
 }
 
@@ -98,7 +98,7 @@
 .image-preview-container {
   width: 100%;
   height: 250px; /* Adjusted height */
-  border: 1px solid white;
+  border: 1px solid maroon;
   border-radius: 4px;
   margin-bottom: 10px;
   display: flex;
@@ -114,7 +114,7 @@
 }
 
 .image-placeholder {
-  color: white;
+  color:maroon;
   text-align: center;
   font-size: 16px;
 }
