@@ -1,30 +1,36 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FaBars, FaBookOpen } from 'react-icons/fa';
 import { Link, useNavigate } from 'react-router-dom';
 import '../components/css/Nav2.css';
 
-
 function Nav2() {
   const [isOpen, setIsOpen] = useState(false);
-  const navigate = useNavigate();  
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    // Check if the user is logged in
+    const token = localStorage.getItem('auth-token');
+    setIsLoggedIn(!!token); // If token exists, set isLoggedIn to true
+  }, []);
 
   const toggleMenu = () => setIsOpen(!isOpen);
 
   const handleLogout = () => {
-    // Clear token and user data from localStorage or sessionStorage
+    // Clear token and user data
     localStorage.removeItem('auth-token');
-        localStorage.removeItem('user'); // If stored in sessionStorage, clear that too
+    localStorage.removeItem('user');
 
-    // Optionally, you can clear other user-related data like profile info or user state
+    // Update state to reflect logout
+    setIsLoggedIn(false);
 
-    // Redirect to the login page after logging out
-    navigate('/login');  // use navigate instead of history.push
+    // Redirect to login page
+    navigate('/login');
   };
-
 
   return (
     <>
-      {/* Top nav2bar */}
+      {/* Top Navbar */}
       <header className="top-navbar2">
         <div className="navbar2-content">
           <div className="hamburger2" onClick={toggleMenu}>
@@ -36,31 +42,35 @@ function Nav2() {
           </div>
         </div>
 
-         {/* Logout Button on the right */}
-         <div className="logout-container">
+        {/* Show Logout button if logged in, otherwise show Login */}
+        <div className="logout-container">
+          {isLoggedIn ? (
             <button className="logout-button" onClick={handleLogout}>Logout</button>
-          </div>
-       
+          ) : (
+            <Link to="/login" className="nav2-link">Login</Link>
+          )}
+        </div>
       </header>
 
-      {/* sidebar2 */}
-      <nav2 className={`sidebar2 ${isOpen ? 'expanded' : 'collapsed'}`}>
+      {/* Sidebar */}
+      <nav className={`sidebar2 ${isOpen ? 'expanded' : 'collapsed'}`}>
         <ul className="nav2-list">
           <li className="nav2-item">
             <Link to="/dashboard" className="nav2-link">Home</Link>
           </li>
-          <li className="nav2-item">
-            <Link to="/login" className="nav2-link">Login</Link>
-          </li>
+          {!isLoggedIn && (
+            <li className="nav2-item">
+              <Link to="/login" className="nav2-link">Login</Link>
+            </li>
+          )}
           <li className="nav2-item">
             <Link to="/About" className="nav2-link">About</Link>
           </li>
-
           <li className="nav2-item">
             <Link to="/user-profile" className="nav2-link">User Profile</Link>
           </li>
         </ul>
-      </nav2>
+      </nav>
     </>
   );
 }

@@ -51,7 +51,7 @@ const register = async (req, res) => {
         const verificationLink = `http://localhost:4000/api/auth/verify-email?token=${verificationToken}`;
 
         const mailOptions = {
-            from: process.env.EMAIL_USER,
+            from: process.env.MAILTRAP_HOST,
             to: user.email,
             subject: "Verify Your Email",
             html: `<p>Click <a href="${verificationLink}">here</a> to verify your email.</p>`,

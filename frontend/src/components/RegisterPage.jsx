@@ -74,7 +74,7 @@ const RegisterPage = () => {
 
       setEmailSent(true); // Show message to check email
 
-      toast.success("📩 Registration successful! Check your email to verify your account.", {
+      toast.success("📩 Registration successful! Wait a minute to verify your email.", {
         onClose: () => navigate("/login") // Redirect after toast closes
       });
     } catch (error) {
@@ -100,19 +100,19 @@ const RegisterPage = () => {
               <div className="form-group">
                 <label htmlFor="name">NAME *</label>
                 <input type="text" id="name" name="name" className={`form-input ${errors.name ? "error-border" : ""}`} onChange={handleChange} />
-                {errors.name && <p className="error-message">{errors.name}</p>}
+                
               </div>
 
               <div className="form-group">
                 <label htmlFor="email">EMAIL *</label>
                 <input type="email" id="email" name="email" className={`form-input ${errors.email ? "error-border" : ""}`} onChange={handleChange} />
-                {errors.email && <p className="error-message">{errors.email}</p>}
+               
               </div>
 
               <div className="form-group">
                 <label htmlFor="password">PASSWORD *</label>
                 <input type="password" id="password" name="password" className={`form-input ${errors.password ? "error-border" : ""}`} onChange={handleChange} />
-                {errors.password && <p className="error-message">{errors.password}</p>}
+               
               </div>
 
               <div className="form-group">
@@ -123,7 +123,7 @@ const RegisterPage = () => {
                     <option key={level} value={level}>{level}</option>
                   ))}
                 </select>
-                {errors.gradeLevel && <p className="error-message">{errors.gradeLevel}</p>}
+                
               </div>
 
               <button type="submit" className="register-button">Sign Up</button>
@@ -140,6 +140,7 @@ const RegisterPage = () => {
                 )}
               </div>
               <input type="file" id="profile-image" onChange={handleImageChange} className="form-input" accept="image/*" />
+             
             </div>
           </div>
         </div>
