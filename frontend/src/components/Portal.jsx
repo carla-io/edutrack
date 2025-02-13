@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+import { toast, ToastContainer } from "react-toastify"; // Import ToastContainer
+import "react-toastify/dist/ReactToastify.css"; // Import styles
 import Nav2 from "./Nav2";
 import Footer from "./Footer";
 import "../components/css/Portal.css";
@@ -23,6 +25,18 @@ const Portal = () => {
     }
   }, []);
 
+  const handlePortalClick = (portalType) => {
+    if (portalType === "shs" && (gradeLevel === "Senior High School" || gradeLevel === "College")) {
+      toast.error("🚫 You cannot access the Senior High School portal.");
+      return;
+    }
+    if (portalType === "college" && gradeLevel === "College") {
+      toast.error("🚫 You cannot access the College portal.");
+      return;
+    }
+    window.location.href = "/documents"; // Redirect if allowed
+  };
+
   return (
     <>
       <Nav2 />
@@ -35,8 +49,7 @@ const Portal = () => {
             <img src={shsImg} alt="Select Portal" />
             <button 
               className="portal-btn" 
-              onClick={() => window.location.href = '/documents'}
-              disabled={gradeLevel === "Senior High School" || gradeLevel === "College"}
+              onClick={() => handlePortalClick("shs")}
             >
               Predict Your Strand
             </button>
@@ -48,8 +61,7 @@ const Portal = () => {
             <img src={collegeImg} alt="Upload Grades" />
             <button 
               className="portal-btn" 
-              onClick={() => window.location.href = '/documents'}
-              disabled={gradeLevel === "College" }
+              onClick={() => handlePortalClick("college")}
             >
               Predict Your Course
             </button>
@@ -61,13 +73,16 @@ const Portal = () => {
             <img src={careerImg} alt="Upload Certificates" />
             <button 
               className="portal-btn" 
-              onClick={() => window.location.href = '/documents'}
+              onClick={() => window.location.href = "/documents"}
             >
               Predict Your Career
             </button>
           </div>
         </div>
       </div>
+      
+      {/* Toast Notification Container */}
+      <ToastContainer position="top-right" autoClose={3000} hideProgressBar />
 
       <Footer />
     </>
