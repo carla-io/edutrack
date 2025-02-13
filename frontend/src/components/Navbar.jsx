@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { FaBars, FaBookOpen } from 'react-icons/fa';
 import { Link, useNavigate } from 'react-router-dom';
-import '../components/css/Navbar.css';
+import '../components/css/Nav2.css';
 
-function Navbar() {
+function Nav2() {
   const [isOpen, setIsOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const navigate = useNavigate();
@@ -31,39 +31,43 @@ function Navbar() {
   return (
     <>
       {/* Top Navbar */}
-     <header className="top-navbar2">
-            <div className="navbar2-content">
-              <div className="hamburger2" onClick={toggleMenu}>
-                <FaBars size={24} />
-              </div>
-              <div className="navbar2-logo">
-                <FaBookOpen className="navbar2-icon" />
-                <span className="navbar2-title">EDUTRACKER</span>
-              </div>
-           
+      <header className="top-navbar2">
+        <div className="navbar2-content">
+          <div className="hamburger2" onClick={toggleMenu}>
+            <FaBars size={24} />
+          </div>
+          <div className="navbar2-logo">
+            <FaBookOpen className="navbar2-icon" />
+            <span className="navbar2-title">EDUTRACKER</span>
+          </div>
+        </div>
 
-          {/* Show Logout button only if logged in */}
-          <div className="logout-container">
-                    {isLoggedIn ? (
-                      <button className="logout-button" onClick={handleLogout}>Logout</button>
-                    ) : (
-                      <Link to="/login" className="nav2-link">Login</Link>
-                    )}
-            </div>
+        {/* Show Logout button if logged in, otherwise show Login */}
+        <div className="logout-container">
+          {isLoggedIn ? (
+            <button className="logout-button" onClick={handleLogout}>Logout</button>
+          ) : (
+            <Link to="/login" className="nav2-link">Login</Link>
+          )}
         </div>
       </header>
 
       {/* Sidebar */}
-      <nav className={`sidebar ${isOpen ? 'expanded' : 'collapsed'}`}>
-        <ul className="nav-list">
-          <li className="nav-item">
-            <Link to="/dashboard" className="nav-link">Home</Link>
+      <nav className={`sidebar2 ${isOpen ? 'expanded' : 'collapsed'}`}>
+        <ul className="nav2-list">
+          <li className="nav2-item">
+            <Link to="/dashboard" className="nav2-link">Home</Link>
           </li>
-          <li className="nav-item">
-            <Link to="/About" className="nav-link">About</Link>
+          {!isLoggedIn && (
+            <li className="nav2-item">
+              <Link to="/login" className="nav2-link">Login</Link>
+            </li>
+          )}
+          <li className="nav2-item">
+            <Link to="/About" className="nav2-link">About</Link>
           </li>
-          <li className="nav-item">
-            <Link to="/user-profile" className="nav-link">User Profile</Link>
+          <li className="nav2-item">
+            <Link to="/user-profile" className="nav2-link">User Profile</Link>
           </li>
         </ul>
       </nav>
@@ -71,4 +75,4 @@ function Navbar() {
   );
 }
 
-export default Navbar;
+export default Nav2;
