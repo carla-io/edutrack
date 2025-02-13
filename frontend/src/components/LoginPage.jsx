@@ -19,33 +19,58 @@ const LoginPage = () => {
     setFormData({ ...formData, [e.target.id]: e.target.value });
   };
 
+  const validate = () => {
+    const { email, password } = formData;
+
+    if (!email || !password) {
+      toast.warning("🚨 Oops! You forgot to fill out all the fields.", {
+        position: "top-right",
+        autoClose: 3000
+      });
+      return false;
+    }
+
+    if (!/\S+@\S+\.\S+/.test(email)) {
+      toast.warning("📧 Hmm... that doesn't look like a valid email!", {
+        position: "top-right",
+        autoClose: 3000
+      });
+      return false;
+    }
+
+    if (password.length < 6) {
+      toast.warning("🔒 Password must be at least 6 characters!", {
+        position: "top-right",
+        autoClose: 3000
+      });
+      return false;
+    }
+
+    return true;
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
+    if (!validate()) return;
+
     try {
       const response = await axios.post("http://localhost:4000/api/auth/login", formData, {
-        headers: {
-          "Content-Type": "application/json"
-        }
+        headers: { "Content-Type": "application/json" }
       });
-  
-      const { token, user } = response.data; // Assuming the response returns a token and user info
-  
-      // Store token and user info in localStorage
+
+      const { token, user } = response.data;
+
       localStorage.setItem("auth-token", token);
       localStorage.setItem("user", JSON.stringify(user));
-  
-      console.log("Login successful:", response.data);
-  
-      // Display success toast
-      toast.success("Login successful!", { position: "top-right", autoClose: 3000 });
 
-  
+      toast.success("🎉 Login successful! Welcome back!", {
+        position: "top-right",
+        autoClose: 2000,
+        onClose: () => navigate("/dashboard")
+      });
+
     } catch (error) {
-      console.error("Login error:", error.response?.data || error.message);
-      
-      // Display error toast
-      toast.error(error.response?.data?.message || "Login failed! Please try again.", {
+      toast.error(error.response?.data?.message || "😟 Login failed! Please check your credentials.", {
         position: "top-right",
         autoClose: 3000
       });
