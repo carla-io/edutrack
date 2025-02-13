@@ -6,12 +6,14 @@ const admin = require('firebase-admin');
 const nodemailer = require("nodemailer");
 
 const transporter = nodemailer.createTransport({
-    service: "gmail",
+    host: process.env.MAILTRAP_HOST,
+    port: process.env.MAILTRAP_PORT,
     auth: {
-        user: process.env.EMAIL_USER, // Your Gmail
-        pass: process.env.EMAIL_PASS  // Your App Password
+        user: process.env.MAILTRAP_USER,
+        pass: process.env.MAILTRAP_PASS
     }
 });
+
 
 // Registration Controller
 const register = async (req, res) => {
