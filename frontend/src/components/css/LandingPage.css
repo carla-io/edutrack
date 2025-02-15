@@ -1,90 +1,114 @@
+/* General Styles */
 .landing-container {
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
+    text-align: center;
     min-height: 100vh;
     background-color: white;
     color: maroon;
+    padding: 20px;
+}
+
+/* Header Section */
+.header-section {
     text-align: center;
-    padding: 20px;
-    box-sizing: border-box;
-}
-
-.content {
-    max-width: 700px;
-    padding: 20px;
-}
-
-.title-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 30px;  /* Reduced gap for better fit */
     margin-bottom: 30px;
 }
 
 .open-book-icon {
-    font-size: 80px;  /* Reduced size to fit better */
+    font-size: 80px;
     color: maroon;
 }
 
-.title-text {
-    text-align: left;
-    line-height: 0.9;
+.main-title {
+    font-size: 2.8rem;
+    font-weight: bold;
 }
 
-.heading {
-    font-size: 3rem;  /* Adjusted to fit the screen */
+.highlight {
+    color: maroon;
     font-weight: bold;
-    letter-spacing: 2px;
-    margin-bottom: 5px;
 }
 
 .tagline {
-    margin-top: 20px;
+    font-size: 1.8rem;
     font-style: italic;
     font-family: 'Lucida Handwriting', cursive;
-    font-size: 1.4rem;  /* Reduced to avoid scroll */
-    line-height: 1.5;
-    color:maroon;
-    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
+    margin-top: 10px;
+    color: maroon;
 }
 
-.button-container {
-    margin-top: 24px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 15px;  /* Adjusted spacing */
-}
-
-.start-button {
-    width: 250px;  /* Medium-long rectangle */
-    padding: 14px 0;
-    background-color: #D32F2F;
-    color: white;
-    font-size: 1.6rem;  /* Slightly smaller for better layout */
+.year-text {
+    font-size: 1.2rem;
     font-weight: bold;
-    border-radius: 6px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-    transition: background-color 0.3s ease, transform 0.2s ease;
-    border: none;
-    cursor: pointer;
+    margin-top: 10px;
+}
+
+/* Feature Section */
+.features-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 30px;
+    margin-top: 30px;
+}
+
+.feature-box {
+    background-color: white;
+    padding: 20px;
+    width: 250px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     text-align: center;
 }
 
-.start-button:hover {
-    background-color: #C62828;
-    transform: translateY(-2px);
+.feature-icon {
+    font-size: 50px;
+    color: black;
 }
 
-.user-icon-left {
-    font-size: 40px;  /* Adjusted icon size */
+.feature-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.feature-text {
+    font-size: 1rem;
+    margin-top: 10px;
+    color: #333;
+}
+
+/* Start Button */
+.start-button {
+    margin-top: 30px;
+    padding: 14px 24px;
+    background-color: maroon;
     color: white;
+    font-size: 1.4rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    transition: all 0.3s ease;
 }
 
-.journey-text {
-    margin-top: 20px;
-    font-size: 1.3rem;  /* Adjusted for consistency */
-    font-weight: 500;
+.start-button:hover {
+    background-color: darkred;
+    transform: scale(1.05);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .features-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .feature-box {
+        width: 90%;
+    }
 }

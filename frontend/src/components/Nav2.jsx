@@ -58,16 +58,22 @@ function Nav2() {
           <li className="nav2-item">
             <Link to="/dashboard" className="nav2-link">Home</Link>
           </li>
+
           {!isLoggedIn && (
             <li className="nav2-item">
               <Link to="/login" className="nav2-link">Login</Link>
             </li>
           )}
+
+          {/* Hide User Profile link if not logged in */}
+          {isLoggedIn && (
+            <li className="nav2-item">
+              <Link to="/user-profile" className="nav2-link">User Profile</Link>
+            </li>
+          )}
+
           <li className="nav2-item">
-            <Link to="/About" className="nav2-link">About</Link>
-          </li>
-          <li className="nav2-item">
-            <Link to="/user-profile" className="nav2-link">User Profile</Link>
+            <Link to="/About" className="nav2-link">About Us</Link>
           </li>
         </ul>
       </nav>
