@@ -6,6 +6,7 @@ import "../components/css/LoginPage.css";
 import { FaAddressCard } from "react-icons/fa6";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Footer from "./Footer";
 
 const LoginPage = () => {
   const [formData, setFormData] = useState({
@@ -114,6 +115,10 @@ const LoginPage = () => {
                   onChange={handleChange}
                 />
               </div>
+                
+              <p className="forgot-password-link">
+                <a href="/forgot-password">Forgot Password?</a>
+              </p> 
 
               <button type="submit" className="login-button">
                 Login
@@ -126,6 +131,8 @@ const LoginPage = () => {
           </div>
         </div>
       </div>
+
+      <Footer/>
     </>
   );
 };

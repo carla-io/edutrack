@@ -2,7 +2,7 @@ const User = require('../models/user');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const cloudinary = require('../config/cloudinary');
-const admin = require('firebase-admin');
+const crypto = require('crypto');
 const nodemailer = require("nodemailer");
 
 const transporter = nodemailer.createTransport({
@@ -161,23 +161,6 @@ const updateProfile = async (req, res) => {
     }
 };
 
-// Firebase Token Verification Middleware
-const verifyFirebaseToken = async (req, res, next) => {
-    const token = req.headers.authorization?.split(' ')[1];
-
-    if (!token) {
-        return res.status(401).json({ message: 'No token provided' });
-    }
-
-    try {
-        const decodedToken = await admin.auth().verifyIdToken(token);
-        req.user = decodedToken;
-        next();
-    } catch (error) {
-        return res.status(401).json({ message: 'Invalid token' });
-    }
-};
-
 const verifyEmail = async (req, res) => {
     const { token } = req.query;
 
@@ -252,5 +235,94 @@ const getUserRegistrationsOverTime = async (req, res) => {
       }
   };
 
+  const requestPasswordReset = async (req, res) => {
+    const { email } = req.body;
+  
+    try {
+      const user = await User.findOne({ email });
+      if (!user) return res.status(404).json({ message: 'User not found' });
+  
+      // Generate a reset token
+      const resetToken = crypto.randomBytes(32).toString('hex');
+      const resetTokenHash = crypto.createHash('sha256').update(resetToken).digest('hex');
+  
+      // Set token and expiration on user object
+      user.resetPasswordToken = resetTokenHash;
+      user.resetPasswordExpires = Date.now() + 3600000; // 1 hour
+      await user.save();
+  
+      // Construct reset URL
+      const resetURL = `http://localhost:3000/reset-password/${resetToken}`; // Update to frontend URL
+  
+      // Email content
+      const mailOptions = {
+        from: 'no-reply@yourdomain.com', // Ensure this email is authorized in Mailtrap
+        to: user.email,
+        subject: 'Password Reset Request',
+        html: `<p>You requested a password reset. Click <a href="${resetURL}">here</a> to reset your password.</p>`
+      };
+  
+      // Send email
+      await transporter.sendMail(mailOptions);
+  
+      res.status(200).json({ message: 'Password reset link sent to your email.' });
+    } catch (error) {
+      console.error('Error sending password reset email:', error);
+      res.status(500).json({ message: 'Error processing password reset request', error });
+    }
+  };
+  
 
-module.exports = { register, login, user, updateProfile, DeleteUser, verifyFirebaseToken, verifyEmail,  getUserRegistrationsOverTime,  getGradeLevelDistribution, getAllUsers };
+// Reset Password
+const resetPassword = async (req, res) => {
+    const { token } = req.params;
+    const { newPassword } = req.body;
+
+    // Validate the newPassword input
+    if (!newPassword || typeof newPassword !== 'string' || newPassword.length < 6) {
+        return res.status(400).json({ message: 'Invalid or missing new password.' });
+    }
+
+    try {
+        const resetTokenHash = crypto.createHash('sha256').update(token).digest('hex');
+
+        // Find user by token and ensure token is not expired
+        const user = await User.findOne({
+            resetPasswordToken: resetTokenHash,
+            resetPasswordExpires: { $gt: Date.now() }
+        });
+
+        if (!user) {
+            return res.status(400).json({ message: 'Invalid or expired token' });
+        }
+
+        // Hash new password
+        const hashedPassword = await bcrypt.hash(newPassword, 10);
+
+        // Update user's password and clear reset token fields
+        user.password = hashedPassword;
+        user.resetPasswordToken = undefined;
+        user.resetPasswordExpires = undefined;
+        await user.save();
+
+        res.status(200).json({ message: 'Password has been reset successfully.' });
+    } catch (error) {
+        console.error('Error resetting password:', error);
+        res.status(500).json({ message: 'Error resetting password', error: error.message });
+    }
+};
+
+
+
+
+module.exports = { register, 
+    login, 
+    user, 
+    updateProfile, 
+    DeleteUser,  
+    verifyEmail,  
+    getUserRegistrationsOverTime,  
+    getGradeLevelDistribution, 
+    getAllUsers,
+    requestPasswordReset,
+    resetPassword};

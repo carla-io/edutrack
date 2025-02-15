@@ -14,6 +14,8 @@ import Results from './components/Results';
 import AdminDashboard from './components/admin/Dashboard';
 import ProtectedRoute from './ProtectedRoutes';
 import AdminUsers from './components/admin/ManageUsers';
+import ForgotPassword from './components/ForgotPassword';
+import ResetPassword from './components/ResetPassword';
 
 function App() {
   const [role, setRole] = useState(null);
@@ -44,6 +46,8 @@ function App() {
           <Route path="/personal-question" element={<PQ />} />
           <Route path="/exam" element={<Exam />} />
           <Route path="/results" element={<Results />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
+          <Route path="/reset-password/:token" element={<ResetPassword />} />
           
           {/* Protected Admin Route */}
           <Route path="/admin/dashboard" element={
