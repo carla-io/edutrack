@@ -196,5 +196,61 @@ const verifyEmail = async (req, res) => {
     }
 };
 
+const getUserRegistrationsOverTime = async (req, res) => {
+    try {
+      const registrations = await User.aggregate([
+        {
+          $group: {
+            _id: { $dateToString: { format: "%Y-%m-%d", date: "$createdAt" } },
+            count: { $sum: 1 }
+          }
+        },
+        { $sort: { _id: 1 } }
+      ]);
+  
+      res.status(200).json({ data: registrations });
+    } catch (error) {
+      res.status(500).json({ message: 'Error retrieving user registration data', error });
+    }
+  };
 
-module.exports = { register, login, user, updateProfile, verifyFirebaseToken, verifyEmail };
+  const getGradeLevelDistribution = async (req, res) => {
+    try {
+      const distribution = await User.aggregate([
+        {
+          $group: {
+            _id: "$gradeLevel",
+            count: { $sum: 1 }
+          }
+        },
+        { $sort: { _id: 1 } }
+      ]);
+  
+      res.status(200).json({ data: distribution });
+    } catch (error) {
+      res.status(500).json({ message: 'Error retrieving grade level distribution', error });
+    }
+  };
+
+  const getAllUsers = async (req, res) => {
+    try {
+      const users = await User.find({ role: 'user' }).select('-password'); // Exclude password field
+      res.status(200).json(users);
+    } catch (error) {
+      res.status(500).json({ message: 'Error retrieving users', error });
+    }
+  };
+
+
+  const DeleteUser = async (req, res) => {  
+    try {
+        const userId = req.params.id;
+        await User.findByIdAndDelete(userId);
+        res.status(200).json({ message: 'User deleted successfully' });
+      } catch (error) {
+        res.status(500).json({ message: 'Error deleting user', error });
+      }
+  };
+
+
+module.exports = { register, login, user, updateProfile, DeleteUser, verifyFirebaseToken, verifyEmail,  getUserRegistrationsOverTime,  getGradeLevelDistribution, getAllUsers };

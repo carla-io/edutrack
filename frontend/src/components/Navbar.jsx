@@ -6,12 +6,20 @@ import '../components/css/Nav2.css';
 function Nav2() {
   const [isOpen, setIsOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
     // Check if the user is logged in
     const token = localStorage.getItem('auth-token');
-    setIsLoggedIn(!!token); // If token exists, set isLoggedIn to true
+    const user = JSON.parse(localStorage.getItem('user')); // Assuming user details are stored in localStorage
+
+    if (token) {
+      setIsLoggedIn(true);
+      if (user?.role === 'admin') {
+        setIsAdmin(true);
+      }
+    }
   }, []);
 
   const toggleMenu = () => setIsOpen(!isOpen);
@@ -23,6 +31,7 @@ function Nav2() {
 
     // Update state to reflect logout
     setIsLoggedIn(false);
+    setIsAdmin(false);
 
     // Redirect to login page
     navigate('/login');
@@ -56,7 +65,9 @@ function Nav2() {
       <nav className={`sidebar2 ${isOpen ? 'expanded' : 'collapsed'}`}>
         <ul className="nav2-list">
           <li className="nav2-item">
-            <Link to="/dashboard" className="nav2-link">Home</Link>
+            <Link to={isAdmin ? "/admin/dashboard" : "/dashboard"} className="nav2-link">
+              Home
+            </Link>
           </li>
 
           {!isLoggedIn && (
@@ -66,15 +77,27 @@ function Nav2() {
           )}
 
           {/* Hide User Profile link if not logged in */}
-          {isLoggedIn && (
+          {isLoggedIn && !isAdmin && (
             <li className="nav2-item">
               <Link to="/user-profile" className="nav2-link">User Profile</Link>
             </li>
           )}
 
           <li className="nav2-item">
-            <Link to="/About" className="nav2-link">About Us</Link>
+            <Link to="/about" className="nav2-link">About Us</Link>
           </li>
+
+          {/* Admin-specific links */}
+          {isAdmin && (
+            <>
+              <li className="nav2-item">
+                <Link to="/admin/users" className="nav2-link">Manage Users</Link>
+              </li>
+              <li className="nav2-item">
+                <Link to="/admin/reports" className="nav2-link">Reports</Link>
+              </li>
+            </>
+          )}
         </ul>
       </nav>
     </>

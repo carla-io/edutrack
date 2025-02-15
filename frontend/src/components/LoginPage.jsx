@@ -52,30 +52,28 @@ const LoginPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!validate()) return;
-
+  
     try {
-      const response = await axios.post("http://localhost:4000/api/auth/login", formData, {
-        headers: { "Content-Type": "application/json" }
-      });
-
+      const response = await axios.post("http://localhost:4000/api/auth/login", formData);
       const { token, user } = response.data;
-
+  
       localStorage.setItem("auth-token", token);
       localStorage.setItem("user", JSON.stringify(user));
-
-      toast.success("🎉 Login successful! Welcome back!", {
-        position: "top-right",
-        autoClose: 2000,
-        onClose: () => navigate("/dashboard")
-      });
-
+      localStorage.setItem("userRole", user.role);
+  
+      toast.success("🎉 Login successful! Welcome back!", { autoClose: 2000 });
+  
+      // Redirect immediately
+      if (user.role === "admin") {
+        navigate("/admin/dashboard");
+      } else {
+        navigate("/dashboard");
+      }
     } catch (error) {
-      toast.error(error.response?.data?.message || "😟 Login failed! Please check your credentials.", {
-        position: "top-right",
-        autoClose: 3000
-      });
+      toast.error("😟 Login failed! Please check your credentials.");
     }
   };
+  
 
   return (
     <>
