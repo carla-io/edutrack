@@ -1,0 +1,73 @@
+/* Exam Page Styling */
+.exam-container {
+    max-width: 800px;
+    margin:auto 20px;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Exam Title */
+.exam-title {
+    font-size: 28px;
+    color: #2c3e50;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+/* Section Title */
+.section-title {
+    font-size: 22px;
+    color: #2980b9;
+    font-weight: 600;
+    margin-top: 20px;
+    text-align: left;
+}
+
+/* Question Box */
+.question-box {
+    background: #ecf0f1;
+    padding: 15px;
+    margin: 15px 0;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    text-align: left;
+}
+
+/* Question Text */
+.question-box h4 {
+    font-size: 18px;
+    color: #34495e;
+}
+
+/* Answer Options */
+.option-item {
+    list-style: none;
+    margin: 8px 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* Radio Button */
+.option-item input[type="radio"] {
+    transform: scale(1.2);
+    cursor: pointer;
+}
+
+/* Labels */
+.option-item label {
+    font-size: 16px;
+    cursor: pointer;
+}
+
+/* No Quiz Message */
+.no-quiz {
+    font-size: 18px;
+    color: #e74c3c;
+    font-weight: 600;
+    margin-top: 20px;
+}

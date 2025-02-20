@@ -21,6 +21,7 @@
   display: flex;
   align-items: center;
   gap: 15px; /* Space between the profile image and text */
+  color: white;
 }
 
 .profile-image-container {
@@ -37,6 +38,7 @@
 
 .profile-text {
   text-align: left; /* Align text to the left */
+  color: white;
 }
 
 .profile-text h2 {
