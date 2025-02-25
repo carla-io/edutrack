@@ -21,6 +21,7 @@ import ResetPassword from './components/ResetPassword';
 import CareerPaths from './components/Career';
 import Stem from './components/Stem';
 import CollegeCourses from './components/Courses';
+import Contact from './components/Contact';
 
 function App() {
   const [role, setRole] = useState(null);
@@ -59,6 +60,7 @@ function App() {
           <Route path="/Career" element={<CareerPaths />} />
           <Route path="/Stem" element={<Stem />} />
           <Route path="/courses" element={<CollegeCourses />} />
+          <Route path="/contact" element={<Contact />} />
           
           {/* Protected Admin Route */}
           <Route path="/admin/dashboard" element={

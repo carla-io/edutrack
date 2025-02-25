@@ -91,6 +91,10 @@ function Nav2() {
             <Link to="/home" className="nav2-link">Home</Link>
           </li>
 
+          <li className="nav2-item">
+            <Link to="/contact" className="nav2-link">Contact</Link>
+          </li>
+
           {/* Hide SHS Strands, Courses, and Careers if admin is logged in */}
           {!isAdmin && (
             <>
