@@ -1,5 +1,5 @@
 import "../components/css/PQ.css";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Nav2 from "./Nav2";
 import Confetti from "react-confetti";
 import { toast, ToastContainer } from "react-toastify"; // ✅ Import Toastify
@@ -131,6 +131,10 @@ const PQ = () => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [answers, setAnswers] = useState({});
   const navigate = useNavigate(); 
+
+  useEffect(() => {
+    localStorage.setItem("pq-answers", JSON.stringify(answers));
+  }, [answers]);
 
   const handleAnswerChange = (event) => {
     setAnswers({

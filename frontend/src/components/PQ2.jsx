@@ -127,6 +127,10 @@ const questions = [
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
     const [answers, setAnswers] = useState({});
     const navigate = useNavigate(); 
+
+    useEffect(() => {
+      localStorage.setItem("pq-answers", JSON.stringify(answers));
+    }, [answers]);
   
     const handleAnswerChange = (event) => {
       setAnswers({

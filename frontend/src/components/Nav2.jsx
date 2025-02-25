@@ -31,6 +31,7 @@ function Nav2() {
     localStorage.removeItem('userRole');
     localStorage.removeItem('pq-answers');
     localStorage.removeItem('extractedGrades');
+    localStorage.removeItem('examScores');
 
     // Update state to reflect logout
     setIsLoggedIn(false);
@@ -90,28 +91,26 @@ function Nav2() {
             <Link to="/home" className="nav2-link">Home</Link>
           </li>
 
-          <li className="nav2-item">
-            <Link to="/Stem" className="nav2-link">SHS Strands</Link>
-          </li>
-
-          <li className="nav2-item">
-            <Link to="/courses" className="nav2-link">Courses</Link>
-          </li>
-
-         <li className="nav2-item">
-            <Link to="/Career" className="nav2-link">Careers</Link>
-          </li>
+          {/* Hide SHS Strands, Courses, and Careers if admin is logged in */}
+          {!isAdmin && (
+            <>
+              <li className="nav2-item">
+                <Link to="/Stem" className="nav2-link">SHS Strands</Link>
+              </li>
+              <li className="nav2-item">
+                <Link to="/courses" className="nav2-link">Courses</Link>
+              </li>
+              <li className="nav2-item">
+                <Link to="/Career" className="nav2-link">Careers</Link>
+              </li>
+            </>
+          )}
 
           {/* Admin-specific links */}
           {isAdmin && (
-            <>
-              <li className="nav2-item">
-                <Link to="/admin/users" className="nav2-link">Manage Users</Link>
-              </li>
-              <li className="nav2-item">
-                <Link to="/admin/reports" className="nav2-link">Reports</Link>
-              </li>
-            </>
+            <li className="nav2-item">
+              <Link to="/admin/users" className="nav2-link">Manage Users</Link>
+            </li>
           )}
         </ul>
       </nav>

@@ -52,7 +52,7 @@ const Exam = () => {
         setTimeLeft((prev) => {
           if (prev === 1) {
             handleNext();
-            return 60;
+            return 15;
           }
           return prev - 1;
         });
