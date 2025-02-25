@@ -28,6 +28,9 @@ function Nav2() {
     // Clear token and user data
     localStorage.removeItem('auth-token');
     localStorage.removeItem('user');
+    localStorage.removeItem('userRole');
+    localStorage.removeItem('pq-answers');
+    localStorage.removeItem('extractedGrades');
 
     // Update state to reflect logout
     setIsLoggedIn(false);
@@ -66,7 +69,7 @@ function Nav2() {
         <ul className="nav2-list">
           <li className="nav2-item">
             <Link to={isAdmin ? "/admin/dashboard" : "/dashboard"} className="nav2-link">
-              Home
+              Dashboard
             </Link>
           </li>
 
@@ -84,7 +87,19 @@ function Nav2() {
           )}
 
           <li className="nav2-item">
-            <Link to="/about" className="nav2-link">About Us</Link>
+            <Link to="/home" className="nav2-link">Home</Link>
+          </li>
+
+          <li className="nav2-item">
+            <Link to="/Stem" className="nav2-link">SHS Strands</Link>
+          </li>
+
+          <li className="nav2-item">
+            <Link to="/courses" className="nav2-link">Courses</Link>
+          </li>
+
+         <li className="nav2-item">
+            <Link to="/Career" className="nav2-link">Careers</Link>
           </li>
 
           {/* Admin-specific links */}

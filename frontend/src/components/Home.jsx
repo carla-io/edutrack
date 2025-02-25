@@ -13,6 +13,12 @@ import christianImage from "../assets/chan.jpg";
 import carlaImage from "../assets/carla.jpg";
 import johnImage from "../assets/josue.jpg";
 
+import Image1 from "../assets/1.png";
+import Image2 from "../assets/2.png";
+import Image3 from "../assets/3.png";
+import Image4 from "../assets/4.png";
+import Image5 from "../assets/5.png";
+
 // Team member data
 const teamMembers = [
   {
@@ -37,7 +43,7 @@ const teamMembers = [
   },
 ];
 
-const About = () => {
+const Home = () => {
   return (
     <>
       <Nav2 />
@@ -107,6 +113,61 @@ const About = () => {
           </div>
         </div>
 
+        <div className="platform-guide">
+      <h2>HOW TO USE OUR PLATFORM</h2>
+      <div className="guide-steps">
+        <div className="guide-step">
+          <img src={Image1} alt="Select the Right Portal" className="guide-image" />
+          <div className="guide-text">
+            <h3>Select the Right Portal</h3>
+            <p>
+              Choose your educational level to start predicting your future path—whether it’s a Senior High School strand, College course, or Career.
+            </p>
+          </div>
+        </div>
+
+        <div className="guide-step">
+          <img src={Image2} alt="Upload Your Grades" className="guide-image" />
+          <div className="guide-text">
+            <h3>Upload Your Grades</h3>
+            <p>
+              Submit a clear image or file of your grades in PNG, JPG, JPEG, or PDF format to help personalize your recommendations.
+            </p>
+          </div>
+        </div>
+
+        <div className="guide-step">
+          <img src={Image3} alt="Upload Certificates" className="guide-image" />
+          <div className="guide-text">
+            <h3>Upload Certificates</h3>
+            <p>
+              Add up to 10 seminar or school-related certificates in JPEG, JPG, or PNG formats to further refine your prediction results.
+            </p>
+          </div>
+        </div>
+
+        <div className="guide-step">
+          <img src={Image4} alt="Answer Personal Questions" className="guide-image" />
+          <div className="guide-text">
+            <h3>Answer Personal Questions</h3>
+            <p>
+              Complete a series of personal questions to gain deeper insights into your strengths and preferences for better recommendations.
+            </p>
+          </div>
+        </div>
+
+        <div className="guide-step">
+          <img src={Image5} alt="Take Subject-Based Exams" className="guide-image" />
+          <div className="guide-text">
+            <h3>Take Subject-Based Exams</h3>
+            <p>
+              Assess your knowledge and skills through exams that help refine and personalize your future predictions.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
         {/* Meet the Team Section */}
         <div className="team-section">
           <h2>MEET THE TEAM</h2>
@@ -126,4 +187,4 @@ const About = () => {
   );
 };
 
-export default About;
+export default Home;

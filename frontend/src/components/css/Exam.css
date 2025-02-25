@@ -1,13 +1,11 @@
 /* Exam Page Styling */
 .exam-container {
-    max-width: 800px;
-    margin:auto 20px;
-    padding: 20px;
-    background-color: #ffffff;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh; /* Full page height */
     text-align: center;
-    font-family: 'Poppins', sans-serif;
 }
 
 /* Exam Title */
@@ -17,6 +15,14 @@
     font-weight: 700;
     margin-bottom: 20px;
 }
+
+.timer {
+    font-size: 18px;
+    color: #e74c3c;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
 
 /* Section Title */
 .section-title {
@@ -41,6 +47,14 @@
 .question-box h4 {
     font-size: 18px;
     color: #34495e;
+}
+
+.quiz-section {
+    width: 50%; /* Adjust width for responsiveness */
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 /* Answer Options */

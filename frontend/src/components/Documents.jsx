@@ -1,72 +1,202 @@
-import React, { useRef, useState } from 'react';
-import axios from 'axios';
-import Nav2 from './Nav2';
-import '../components/css/Documents.css';
-import Footer from './Footer';
+import React, { useState, useRef } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import Nav2 from "./Nav2";
+import Footer from "./Footer";
+import "../components/css/Documents.css";
+
 
 const Documents = () => {
-    const gradesInputRef = useRef(null);
-    const certificatesInputRef = useRef(null);
-    const [imageURL, setImageURL] = useState("");
+    const [documents, setDocuments] = useState({
+        grades: { files: [], previews: [], processed: false, warnings: [] },
+        certificates: { files: [], previews: [], processed: false, warnings: [] }
+    });
 
-    const handleUploadClick = (inputRef) => {
-        if (inputRef.current) {
-            inputRef.current.click();
-        }
+    const [processing, setProcessing] = useState(false);
+    const [selectedImage, setSelectedImage] = useState(null);
+    const [cameraMode, setCameraMode] = useState(null); // "grades" or "certificates"
+    const videoRef = useRef(null);
+    const canvasRef = useRef(null);
+    const navigate = useNavigate();
+    
+
+    const handleFileChange = (event, type) => {
+        const files = Array.from(event.target.files).slice(0, 10);
+        setDocuments(prev => ({
+            ...prev,
+            [type]: {
+                ...prev[type],
+                files,
+                previews: files.map(file => URL.createObjectURL(file)),
+                processed: false
+            }
+        }));
     };
 
-    const handleFileChange = async (event) => {
-        const file = event.target.files[0];
-        if (!file) return;
+    const handleUpload = async (type) => {
+        if (documents[type].files.length === 0) {
+            alert(`Please upload at least one ${type} file.`);
+            return;
+        }
 
+        setProcessing(true);
         const formData = new FormData();
-        formData.append("file", file);
+        documents[type].files.forEach(file => formData.append(type, file));
 
         try {
-            const response = await axios.post("http://127.0.0.1:5000/upload", formData, {
+            const response = await axios.post("http://127.0.0.1:5001/process", formData, {
                 headers: { "Content-Type": "multipart/form-data" },
-                responseType: "blob",
             });
 
-            const imageBlob = new Blob([response.data], { type: "image/png" });
-            const imageObjectURL = URL.createObjectURL(imageBlob);
-            setImageURL(imageObjectURL);
+            if (response.data) {
+                let extractedData = response.data;
+                setDocuments(prev => ({
+                    ...prev,
+                    [type]: {
+                        ...prev[type],
+                        processed: true,
+                        warnings: extractedData[type]?.filter(item => item.warning || item.error) || []
+                    }
+                }));
+
+                localStorage.setItem(`extracted${type.charAt(0).toUpperCase() + type.slice(1)}`, JSON.stringify(extractedData));
+                alert("Data processed successfully!");
+            }
         } catch (error) {
-            console.error("Upload failed", error);
+            console.error(`Error processing ${type}:`, error);
+            alert(`Error processing ${type}. Check the console for details.`);
+        }
+
+        setProcessing(false);
+    };
+
+    const startCamera = (type) => {
+        setCameraMode(type);
+        navigator.mediaDevices.getUserMedia({ video: true })
+            .then(stream => {
+                if (videoRef.current) {
+                    videoRef.current.srcObject = stream;
+                    videoRef.current.play();
+                }
+            })
+            .catch(error => console.error("Error accessing camera:", error));
+    };
+
+    const captureImage = () => {
+        if (videoRef.current && canvasRef.current) {
+            const context = canvasRef.current.getContext("2d");
+            canvasRef.current.width = videoRef.current.videoWidth;
+            canvasRef.current.height = videoRef.current.videoHeight;
+            context.drawImage(videoRef.current, 0, 0, canvasRef.current.width, canvasRef.current.height);
+
+            const imageUrl = canvasRef.current.toDataURL("image/png");
+
+            setDocuments(prev => ({
+                ...prev,
+                [cameraMode]: {
+                    ...prev[cameraMode],
+                    previews: [...prev[cameraMode].previews, imageUrl],
+                    files: [...prev[cameraMode].files, dataURLtoFile(imageUrl, `capture-${Date.now()}.png`)]
+                }
+            }));
+
+            stopCamera();
         }
     };
 
+    const stopCamera = () => {
+        setCameraMode(null);
+        if (videoRef.current && videoRef.current.srcObject) {
+            videoRef.current.srcObject.getTracks().forEach(track => track.stop());
+        }
+    };
+
+    const dataURLtoFile = (dataurl, filename) => {
+        let arr = dataurl.split(","),
+            mime = arr[0].match(/:(.*?);/)[1],
+            bstr = atob(arr[1]),
+            n = bstr.length,
+            u8arr = new Uint8Array(n);
+        while (n--) {
+            u8arr[n] = bstr.charCodeAt(n);
+        }
+        return new File([u8arr], filename, { type: mime });
+    };
+
+    const openImageZoom = (imageSrc) => setSelectedImage(imageSrc);
+    const closeImageZoom = () => setSelectedImage(null);
+
+    const handleProceedToExam = () => {
+        const storedUser = localStorage.getItem("user");
+    
+        if (storedUser) {
+            try {
+                const parsedUser = JSON.parse(storedUser); // Parse JSON
+                const gradeLevel = parsedUser.gradeLevel || ""; // Extract gradeLevel safely
+    
+                navigate(
+                    gradeLevel === "Junior High School" ? "/PQ" :
+                    gradeLevel === "Senior High School" ? "/PQ2" :
+                    gradeLevel === "College" ? "/PQ3" :
+                    "/default-route" // Fallback route
+                );
+            } catch (error) {
+                console.error("Error parsing user data:", error);
+                navigate("/default-route"); // Redirect to default if there's an error
+            }
+        } else {
+            navigate("/default-route"); // Redirect if no user is found
+        }
+    };
+    
+    
     return (
         <>
             <Nav2 />
             <div className="container">
+                <h2 className="title">Upload Your Documents</h2>
                 <div className="upload-section">
-                    {/* Process 1 - Upload Grades */}
-                    <div className="upload-container">
-                        <h2 className="process-text">PROCESS 1</h2>
-                        <div className="upload-box">
-                            <h3>UPLOAD YOUR GRADES</h3>
-                            <div className="upload-area" onClick={() => handleUploadClick(gradesInputRef)}>
-                                <img src="upload-icon.png" alt="Upload File" className="upload-icon"/>
-                                <p>Place your file here</p>
+                    {["grades", "certificates"].map((type) => (
+                        <div className="upload-container" key={type}>
+                            <h3>Upload Your {type.charAt(0).toUpperCase() + type.slice(1)} (Max 10 Files)</h3>
+                            <input type="file" accept="image/*" multiple onChange={(e) => handleFileChange(e, type)} />
+                            <button onClick={() => startCamera(type)}>📸 Capture via Camera</button>
+                            <div className="preview-container">
+                                {documents[type].previews.map((preview, index) => (
+                                    <div key={index} className="image-wrapper">
+                                        <img src={preview} alt={`${type} Preview ${index + 1}`} className="preview-image" onClick={() => openImageZoom(preview)} />
+                                        {documents[type].processed && <p className="success-message">✅ Successfully Processed</p>}
+                                        {documents[type].warnings[index] && <p className="warning-message">⚠️ {documents[type].warnings[index].warning || documents[type].warnings[index].error}</p>}
+                                    </div>
+                                ))}
                             </div>
-                            <input 
-                                type="file" 
-                                ref={gradesInputRef} 
-                                style={{ display: "none" }} 
-                                onChange={handleFileChange} 
-                            />
-                            <button className="upload-button" onClick={() => handleUploadClick(gradesInputRef)}>UPLOAD</button>
+                            <button className="upload-button" onClick={() => handleUpload(type)} disabled={processing}>
+                                {processing ? `Processing ${type}...` : `Upload & Process ${type}`}
+                            </button>
                         </div>
-                    </div>
-
-                    {/* Display Uploaded Image */}
-                    {imageURL && <img src={imageURL} alt="Processed Document" className="uploaded-image" />}
+                    ))}
                 </div>
-
-                <button className="next-button" onClick={() => window.location.href = '/personal-question'}>NEXT</button>
+                <button className="proceed-button" onClick={handleProceedToExam}>Proceed to Exam</button>
             </div>
             <Footer />
+
+            {selectedImage && (
+                <div className="overlay" onClick={closeImageZoom}>
+                    <div className="image-zoom-window">
+                        <img src={selectedImage} alt="Zoomed" />
+                        <button onClick={closeImageZoom}>Close</button>
+                    </div>
+                </div>
+            )}
+
+            {cameraMode && (
+                <div className="camera-modal">
+                    <video ref={videoRef} autoPlay playsInline />
+                    <button onClick={captureImage}>📷 Capture</button>
+                    <button onClick={stopCamera}>❌ Close Camera</button>
+                    <canvas ref={canvasRef} style={{ display: "none" }} />
+                </div>
+            )}
         </>
     );
 };

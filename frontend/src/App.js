@@ -4,11 +4,13 @@ import LandingPage from './components/LandingPage';
 import Login from './components/LoginPage'; 
 import Register from './components/RegisterPage'; 
 import UserProfile from './components/UserProfile';
-import About from './components/About';
+import Home from './components/Home';
 import Dashboard from './components/Dashboard';
 import Portal from './components/Portal';
 import Documents from './components/Documents';
 import PQ from './components/PQ';
+import PQ2 from './components/PQ2';
+import PQ3 from './components/PQ3';
 import Exam from './components/Exam';
 import Results from './components/Results';
 import AdminDashboard from './components/admin/Dashboard';
@@ -16,6 +18,9 @@ import ProtectedRoute from './ProtectedRoutes';
 import AdminUsers from './components/admin/ManageUsers';
 import ForgotPassword from './components/ForgotPassword';
 import ResetPassword from './components/ResetPassword';
+import CareerPaths from './components/Career';
+import Stem from './components/Stem';
+import CollegeCourses from './components/Courses';
 
 function App() {
   const [role, setRole] = useState(null);
@@ -40,7 +45,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/user-profile" element={<UserProfile />} />
-          <Route path="/about" element={<About />} />
+          <Route path="/home" element={<Home />} />
           <Route path="/portal" element={<Portal />} />
           <Route path="/documents" element={<Documents />} />
           <Route path="/personal-question" element={<PQ />} />
@@ -48,6 +53,12 @@ function App() {
           <Route path="/results" element={<Results />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/reset-password/:token" element={<ResetPassword />} />
+          <Route path="/PQ" element={<PQ />} />
+          <Route path="/PQ2" element={<PQ2 />} />
+          <Route path="/PQ3" element={<PQ3 />} />
+          <Route path="/Career" element={<CareerPaths />} />
+          <Route path="/Stem" element={<Stem />} />
+          <Route path="/courses" element={<CollegeCourses />} />
           
           {/* Protected Admin Route */}
           <Route path="/admin/dashboard" element={

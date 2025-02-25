@@ -14,8 +14,10 @@
   margin-top: 100px;
   width: 50vh;
   display: flex;
-  align-items: center; /* Aligns the profile info and image in the center vertically */
+  align-items: center; /* Keeps profile info and image aligned */
+  justify-content: space-between; /* Moves button to the right */
 }
+
 
 .profile-info {
   display: flex;
@@ -44,6 +46,7 @@
 .profile-text h2 {
   margin: 0;
   font-size: 1.5rem;
+  color: white;
   
 }
 
@@ -141,6 +144,23 @@
   display: block;
   grid-column: span 3; /* Keeps the last row centered */
 }
+
+.start-process-btn {
+  background-color: #FFD700; /* Gold color for visibility */
+  color: black;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  border: none;
+  font-weight: bold;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.start-process-btn:hover {
+  background-color: #FFA500; /* Orange for hover effect */
+  transform: scale(1.05);
+}
+
 
 @media (max-width: 768px) {
   .charts-container {
