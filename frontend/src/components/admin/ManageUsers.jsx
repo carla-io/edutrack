@@ -50,7 +50,6 @@ const ManageUsers = () => {
     { name: 'Email', selector: row => row.email, sortable: true },
     { name: 'Grade Level', selector: row => row.gradeLevel, sortable: true },
     { name: 'Role', selector: row => row.role, sortable: true },
-    { name: 'Status', selector: row => (row.isActive ? 'Active' : 'Disabled'), sortable: true },
     {
       name: 'Actions',
       cell: row => (

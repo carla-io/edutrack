@@ -7,6 +7,7 @@ import "../components/css/Exam.css";
 import shsQuiz from "../shsquiz.json";
 import collegeQuiz from "../collegequiz.json";
 import careerQuiz from "../careerquiz.json";
+import Footer from "./Footer"
 
 const Exam = () => {
   const [gradeLevel, setGradeLevel] = useState("");
@@ -188,6 +189,7 @@ const Exam = () => {
           <p className="no-quiz">No quiz available for your grade level.</p>
         )}
       </div>
+      <Footer/>
     </div>
   );
 };
