@@ -314,6 +314,42 @@ const resetPassword = async (req, res) => {
   }
 };
 
+const sendGraphEmail = async (req, res) => {
+  try {
+    const { email, image } = req.body;
+    if (!image) {
+      return res.status(400).json({ message: "No graph image provided" });
+    }
+
+    // Upload image to Cloudinary
+    const uploadResponse = await cloudinary.uploader.upload(image, {
+      folder: "graph_images",
+    });
+
+    if (!uploadResponse.secure_url) {
+      return res.status(500).json({ message: "Failed to upload image to Cloudinary" });
+    }
+
+    const mailOptions = {
+      from: process.env.GMAIL_USER,
+      to: email,
+      subject: "Your Requested Graph",
+      text: "Please find the graph link below:",
+      html: `<p>Please find your requested graph below:</p><br><a href="${uploadResponse.secure_url}" target="_blank">View Graph</a>`
+    };
+
+    transporter.sendMail(mailOptions, (error, info) => {
+      if (error) {
+        console.error("Error sending email:", error);
+        return res.status(500).json({ message: "Failed to send email" });
+      }
+      res.status(200).json({ message: "Graph sent successfully!", info });
+    });
+  } catch (error) {
+    console.error("Error:", error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+};
 
 
 
@@ -328,4 +364,5 @@ module.exports = { register,
     getGradeLevelDistribution, 
     getAllUsers,
     requestPasswordReset,
-    resetPassword};
+    resetPassword,
+    sendGraphEmail};

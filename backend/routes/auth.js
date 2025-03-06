@@ -11,7 +11,8 @@ const { register,
     getGradeLevelDistribution, 
     getAllUsers,
     requestPasswordReset,
-    resetPassword } = require('../controllers/authController');
+    resetPassword,
+    sendGraphEmail } = require('../controllers/authController');
 
 router.post('/register', upload.single('profilePicture'),  register);
 router.post('/login',  login);
@@ -24,5 +25,6 @@ router.get('/get-all-users', getAllUsers);
 router.delete('/delete-user/:id', DeleteUser);
 router.post('/request-password-reset', requestPasswordReset);
 router.post('/reset-password/:token', resetPassword);
+router.post("/send-graph-email", upload.single("graph"), sendGraphEmail);
 
 module.exports = router;
